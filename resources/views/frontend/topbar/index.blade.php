@@ -1,432 +1,19 @@
-<nav class="topbar no-print">
-    <style>
-        .topbar {
-            position: sticky;
-            top: 0;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            z-index: 1030;
-            transition: var(--transition);
-        }
+<nav class="print:hidden sticky top-0 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.08)] z-[1030] transition-all duration-300">
+    <div class="flex items-center justify-between px-6 py-4 max-w-full md:px-4 sm:px-4">
         
-        .topbar-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 25px;
-            max-width: 100%;
-        }
-        
-        /* Left Section */
-        .topbar-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .sidebar-toggle {
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: var(--light-bg);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--text-dark);
-        }
-        
-        .sidebar-toggle:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        .breadcrumb-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .breadcrumb {
-            background: transparent;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        
-        .breadcrumb-item {
-            color: var(--text-light);
-            font-size: 14px;
-        }
-        
-        .breadcrumb-item a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .breadcrumb-item a:hover {
-            color: var(--primary-color);
-        }
-        
-        .breadcrumb-item.active {
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-        
-        /* Center Section - Search */
-        .topbar-search {
-            flex: 1;
-            max-width: 600px;
-            margin: 0 20px;
-            position: relative;
-        }
-        
-        .search-form {
-            position: relative;
-        }
-        
-        .search-input {
-            width: 100%;
-            padding: 12px 50px 12px 45px;
-            border: 2px solid var(--light-bg);
-            border-radius: 25px;
-            font-size: 14px;
-            transition: var(--transition);
-            background: var(--light-bg);
-        }
-        
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            background: white;
-            box-shadow: 0 4px 15px rgba(0,137,123,0.1);
-        }
-        
-        .search-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
-            font-size: 16px;
-        }
-        
-        .search-clear {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-light);
-            cursor: pointer;
-            display: none;
-            transition: var(--transition);
-        }
-        
-        .search-clear:hover {
-            color: var(--text-dark);
-        }
-        
-        .search-input:not(:placeholder-shown) ~ .search-clear {
-            display: block;
-        }
-        
-        /* Search Suggestions */
-        .search-suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            margin-top: 10px;
-            max-height: 400px;
-            overflow-y: auto;
-            display: none;
-            z-index: 1000;
-        }
-        
-        .search-suggestions.show {
-            display: block;
-        }
-        
-        .suggestion-item {
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--light-bg);
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .suggestion-item:hover {
-            background: var(--light-bg);
-        }
-        
-        .suggestion-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-primary);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-        }
-        
-        .suggestion-content {
-            flex: 1;
-        }
-        
-        .suggestion-title {
-            font-weight: 500;
-            color: var(--text-dark);
-            margin-bottom: 3px;
-        }
-        
-        .suggestion-category {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-        
-        /* Right Section */
-        .topbar-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .theme-toggle,
-        .notification-btn {
-            width: 40px;
-            height: 40px;
-            border: none;
-            background: var(--light-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-        }
-        
-        .theme-toggle:hover,
-        .notification-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #f44336;
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 10px;
-            border: 2px solid white;
-        }
-        
-        /* User Menu */
-        .user-menu {
-            position: relative;
-        }
-        
-        .user-menu-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 15px;
-            background: var(--light-bg);
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .user-menu-toggle:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-        
-        .user-menu-toggle:hover .user-avatar-sm {
-            border-color: white;
-        }
-        
-        .user-avatar-sm {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 14px;
-            border: 2px solid transparent;
-            transition: var(--transition);
-        }
-        
-        .user-name-display {
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .user-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            margin-top: 10px;
-            min-width: 220px;
-            display: none;
-            z-index: 1000;
-        }
-        
-        .user-dropdown.show {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .dropdown-header {
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--light-bg);
-        }
-        
-        .dropdown-user-name {
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 3px;
-        }
-        
-        .dropdown-user-email {
-            font-size: 13px;
-            color: var(--text-light);
-        }
-        
-        .dropdown-menu-list {
-            padding: 10px 0;
-        }
-        
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 20px;
-            color: var(--text-dark);
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: 14px;
-        }
-        
-        .dropdown-item:hover {
-            background: var(--light-bg);
-            color: var(--primary-color);
-        }
-        
-        .dropdown-item i {
-            width: 20px;
-            text-align: center;
-        }
-        
-        .dropdown-divider {
-            height: 1px;
-            background: var(--light-bg);
-            margin: 10px 0;
-        }
-        
-        /* Login Button */
-        .login-btn {
-            padding: 10px 25px;
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,137,123,0.3);
-            color: white;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .topbar-search {
-                display: none;
-            }
-            
-            .breadcrumb-container {
-                display: none;
-            }
-            
-            .user-name-display {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .topbar-container {
-                padding: 12px 15px;
-            }
-            
-            .theme-toggle,
-            .notification-btn,
-            .user-menu-toggle {
-                width: 36px;
-                height: 36px;
-            }
-        }
-    </style>
-    
-    <div class="topbar-container">
         <!-- Left Section -->
-        <div class="topbar-left">
+        <div class="flex items-center gap-5">
             <!-- Sidebar Toggle -->
-            <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+            <button class="w-10 h-10 border-0 bg-light-bg rounded-lg flex items-center justify-center cursor-pointer transition-all duration-300 text-text-dark hover:bg-primary hover:text-white hover:scale-105" id="sidebarToggle" aria-label="Toggle sidebar">
                 <i class="fas fa-bars"></i>
             </button>
             
             <!-- Breadcrumb -->
-            <div class="breadcrumb-container">
+            <div class="hidden md:flex items-center gap-2">
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="{{ route('home') }}">
+                    <ol class="flex items-center gap-2 flex-wrap bg-transparent p-0 m-0">
+                        <li class="text-text-light text-sm">
+                            <a href="{{ route('home') }}" class="text-text-light transition-all duration-300 hover:text-primary no-underline">
                                 <i class="fas fa-home"></i>
                             </a>
                         </li>
@@ -437,91 +24,91 @@
         </div>
         
         <!-- Center Section - Search -->
-        <div class="topbar-search">
-            <form action="" method="GET" class="search-form">
-                <i class="fas fa-search search-icon"></i>
+        <div class="hidden md:flex flex-1 max-w-[600px] mx-5 relative">
+            <form action="" method="GET" class="relative w-full">
+                <i class="fas fa-search absolute left-[18px] top-1/2 -translate-y-1/2 text-text-light text-base"></i>
                 <input 
                     type="text" 
                     name="q" 
-                    class="search-input" 
+                    class="w-full py-3 pr-12 pl-11 border-2 border-light-bg rounded-full text-sm transition-all duration-300 bg-light-bg focus:outline-none focus:border-primary focus:bg-white focus:shadow-[0_4px_15px_rgba(0,137,123,0.1)]" 
                     placeholder="Search tutorials, languages, topics..."
                     autocomplete="off"
                     id="searchInput"
                 >
-                <button type="button" class="search-clear" id="searchClear">
+                <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 bg-transparent border-0 text-text-light cursor-pointer hidden transition-all duration-300 hover:text-text-dark" id="searchClear">
                     <i class="fas fa-times"></i>
                 </button>
             </form>
             
             <!-- Search Suggestions -->
-            <div class="search-suggestions" id="searchSuggestions">
+            <div class="absolute top-full left-0 right-0 bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.15)] mt-2.5 max-h-[400px] overflow-y-auto hidden z-[1000]" id="searchSuggestions">
                 <!-- Dynamic suggestions will be loaded here -->
             </div>
         </div>
         
         <!-- Right Section -->
-        <div class="topbar-right">
+        <div class="flex items-center gap-4 sm:gap-3">
             <!-- Theme Toggle -->
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" data-bs-toggle="tooltip" title="Toggle dark mode">
+            <button class="w-10 h-10 border-0 bg-light-bg rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 relative hover:bg-primary hover:text-white hover:scale-105 sm:w-9 sm:h-9" id="themeToggle" aria-label="Toggle theme" title="Toggle dark mode">
                 <i class="fas fa-moon"></i>
             </button>
             
             @auth
                 <!-- Notifications -->
-                <button class="notification-btn" data-bs-toggle="tooltip" title="Notifications">
+                <button class="w-10 h-10 border-0 bg-light-bg rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 relative hover:bg-primary hover:text-white hover:scale-105 sm:w-9 sm:h-9" title="Notifications">
                     <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-xl border-2 border-white">3</span>
                 </button>
                 
                 <!-- User Menu -->
-                <div class="user-menu">
-                    <button class="user-menu-toggle" id="userMenuToggle">
-                        <div class="user-avatar-sm">
+                <div class="relative">
+                    <button class="flex items-center gap-2.5 px-4 py-2 bg-light-bg border-0 rounded-full cursor-pointer transition-all duration-300 hover:bg-primary hover:text-white sm:px-3" id="userMenuToggle">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-sm border-2 border-transparent transition-all duration-300">
                             {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
                         </div>
-                        <span class="user-name-display">{{ auth()->user()->name }}</span>
-                        <i class="fas fa-chevron-down"></i>
+                        <span class="text-sm font-medium hidden md:inline">{{ auth()->user()->name }}</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
                     </button>
                     
                     <!-- User Dropdown -->
-                    <div class="user-dropdown" id="userDropdown">
-                        <div class="dropdown-header">
-                            <div class="dropdown-user-name">{{ auth()->user()->name }}</div>
-                            <div class="dropdown-user-email">{{ auth()->user()->email }}</div>
+                    <div class="absolute top-full right-0 bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.15)] mt-2.5 min-w-[220px] hidden z-[1000] animate-[slideDown_0.3s_ease]" id="userDropdown">
+                        <div class="p-4 border-b border-light-bg">
+                            <div class="font-semibold text-text-dark mb-1">{{ auth()->user()->name }}</div>
+                            <div class="text-[13px] text-text-light">{{ auth()->user()->email }}</div>
                         </div>
                         
-                        <div class="dropdown-menu-list">
-                            <a href="{{ route('profile') }}" class="dropdown-item">
-                                <i class="fas fa-user"></i>
+                        <div class="py-2.5">
+                            <a href="{{ route('profile') }}" class="flex items-center gap-3 px-5 py-3 text-text-dark transition-all duration-300 text-sm hover:bg-light-bg hover:text-primary no-underline">
+                                <i class="fas fa-user w-5 text-center"></i>
                                 <span>My Profile</span>
                             </a>
                             
-                            <a href="{{ route('bookmarks') }}" class="dropdown-item">
-                                <i class="fas fa-bookmark"></i>
+                            <a href="{{ route('bookmarks') }}" class="flex items-center gap-3 px-5 py-3 text-text-dark transition-all duration-300 text-sm hover:bg-light-bg hover:text-primary no-underline">
+                                <i class="fas fa-bookmark w-5 text-center"></i>
                                 <span>Bookmarks</span>
                             </a>
                             
-                            <a href="{{ route('progress') }}" class="dropdown-item">
-                                <i class="fas fa-chart-line"></i>
+                            <a href="{{ route('progress') }}" class="flex items-center gap-3 px-5 py-3 text-text-dark transition-all duration-300 text-sm hover:bg-light-bg hover:text-primary no-underline">
+                                <i class="fas fa-chart-line w-5 text-center"></i>
                                 <span>Learning Progress</span>
                             </a>
                             
-                            <a href="{{ route('settings') }}" class="dropdown-item">
-                                <i class="fas fa-cog"></i>
+                            <a href="{{ route('settings') }}" class="flex items-center gap-3 px-5 py-3 text-text-dark transition-all duration-300 text-sm hover:bg-light-bg hover:text-primary no-underline">
+                                <i class="fas fa-cog w-5 text-center"></i>
                                 <span>Settings</span>
                             </a>
                             
-                            <div class="dropdown-divider"></div>
+                            <div class="h-px bg-light-bg my-2.5"></div>
                             
-                            <a href="{{ route('help') }}" class="dropdown-item">
-                                <i class="fas fa-question-circle"></i>
+                            <a href="{{ route('help') }}" class="flex items-center gap-3 px-5 py-3 text-text-dark transition-all duration-300 text-sm hover:bg-light-bg hover:text-primary no-underline">
+                                <i class="fas fa-question-circle w-5 text-center"></i>
                                 <span>Help Center</span>
                             </a>
                             
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="dropdown-item" style="width: 100%; border: none; background: none; cursor: pointer;">
-                                    <i class="fas fa-sign-out-alt"></i>
+                                <button type="submit" class="flex items-center gap-3 px-5 py-3 text-text-dark transition-all duration-300 text-sm hover:bg-light-bg hover:text-primary w-full border-0 bg-transparent cursor-pointer text-left">
+                                    <i class="fas fa-sign-out-alt w-5 text-center"></i>
                                     <span>Logout</span>
                                 </button>
                             </form>
@@ -530,13 +117,48 @@
                 </div>
             @else
                 <!-- Login Button for Guests -->
-                <a href="" class="login-btn">
+                <a href="" class="py-2.5 px-6 bg-gradient-to-r from-primary to-secondary text-white border-0 rounded-full font-medium cursor-pointer transition-all duration-300 inline-block hover:-translate-y-0.5 hover:shadow-[0_5px_15px_rgba(0,137,123,0.3)] no-underline">
                     <i class="fas fa-sign-in-alt"></i> Login
                 </a>
             @endauth
         </div>
     </div>
 </nav>
+
+<style>
+    /* Minimal custom CSS for features Tailwind can't handle */
+    
+    /* Show clear button when input has value */
+    #searchInput:not(:placeholder-shown) ~ #searchClear {
+        display: block;
+    }
+    
+    /* Show dropdown */
+    #searchSuggestions.show {
+        display: block;
+    }
+    
+    #userDropdown.show {
+        display: block;
+    }
+    
+    /* Slide down animation */
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Hover effect for user menu avatar border */
+    #userMenuToggle:hover .w-8 {
+        border-color: white;
+    }
+</style>
 
 <script>
     // User menu toggle
@@ -592,25 +214,29 @@
     
     let searchTimeout;
     
-    searchInput.addEventListener('input', function() {
-        const query = this.value.trim();
-        
-        clearTimeout(searchTimeout);
-        
-        if (query.length >= 2) {
-            searchTimeout = setTimeout(() => {
-                fetchSearchSuggestions(query);
-            }, 300);
-        } else {
-            searchSuggestions.classList.remove('show');
-        }
-    });
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            
+            clearTimeout(searchTimeout);
+            
+            if (query.length >= 2) {
+                searchTimeout = setTimeout(() => {
+                    fetchSearchSuggestions(query);
+                }, 300);
+            } else {
+                searchSuggestions.classList.remove('show');
+            }
+        });
+    }
     
-    searchClear.addEventListener('click', function() {
-        searchInput.value = '';
-        searchSuggestions.classList.remove('show');
-        searchInput.focus();
-    });
+    if (searchClear) {
+        searchClear.addEventListener('click', function() {
+            searchInput.value = '';
+            searchSuggestions.classList.remove('show');
+            searchInput.focus();
+        });
+    }
     
     function fetchSearchSuggestions(query) {
         // Example: Fetch suggestions via AJAX
@@ -631,13 +257,13 @@
         }
         
         const html = suggestions.map(item => `
-            <a href="${item.url}" class="suggestion-item">
-                <div class="suggestion-icon">
+            <a href="${item.url}" class="flex items-center gap-4 p-3 border-b border-light-bg cursor-pointer transition-all duration-300 hover:bg-light-bg no-underline">
+                <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white text-lg">
                     <i class="${item.icon}"></i>
                 </div>
-                <div class="suggestion-content">
-                    <div class="suggestion-title">${item.title}</div>
-                    <div class="suggestion-category">${item.category}</div>
+                <div class="flex-1">
+                    <div class="font-medium text-text-dark mb-1">${item.title}</div>
+                    <div class="text-xs text-text-light">${item.category}</div>
                 </div>
             </a>
         `).join('');
@@ -648,7 +274,7 @@
     
     // Close suggestions when clicking outside
     document.addEventListener('click', function(e) {
-        if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+        if (searchInput && searchSuggestions && !searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
             searchSuggestions.classList.remove('show');
         }
     });

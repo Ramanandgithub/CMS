@@ -4,28 +4,46 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommonController;
 
-Route::get('/', function () {
-    return view('frontend.home');
+/*
+|--------------------------------------------------------------------------
+| Frontend Routes
+|--------------------------------------------------------------------------
+*/
+
+// Route::view('/', 'frontend.index')->name('frontend.index');
+Route::get('/',function(){
+     return view('frontend.default');
+});
+
+Route::get('/home', [HomeController::class, 'home'])->name('home');
+
+Route::view('/login', 'backend.loginpage.index')->name('login');
+
+
+/*
+|--------------------------------------------------------------------------
+| Backend Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    Route::view('/dashboard', 'backend.dashboard.index')
+        ->name('dashboard');
+
+    Route::view('/add-subject', 'backend.add-subject')
+        ->name('add-subject');
 });
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+/*
+|--------------------------------------------------------------------------
+| Common Routes
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/login', function () {
-    return view('backend.loginpage.index');
-})->name('login');
-
-// backend routes define here 
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('backend.dashboard.index');
-    })->name('admin.dashboard');
+Route::post('fetch/{type}/{id?}/{returntype?}', [CommonController::class, 'fetchData'])
+    ->name('fetch.data');
 
 
-    Route::get('/add-subject', function () {
-        return view('backend.add-subject');
-    })->name('admin.add-subject');
-
-});
-
-Route::post('fetch/{type}/{id?}/{returntype?}', [CommonController::class, 'fetchData']);
+    
