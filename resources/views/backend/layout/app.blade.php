@@ -1,177 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title', 'BBPS Dashboard')</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', 'RTechPoint')</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-
-
-    <!-- jQuery (must come BEFORE DataTables JS) -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap 5 JS (already included) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- DataTables JS for Bootstrap 5 -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
-    <!-- Buttons extension JS -->
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-
-    <!-- JSZip & pdfmake for Excel/PDF export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <!-- Sweetalert  -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Chart Cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+<style>
+    .dataTables_wrapper .dataTables_filter input {
+        border: 2px solid #e5e7eb;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        margin-left: 0.5rem;
+    }
+    
+    .dataTables_wrapper .dataTables_length select {
+        border: 2px solid #e5e7eb;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        margin: 0 0.5rem;
+    }
+    
+    table.dataTable tbody tr {
+        transition: all 0.2s ease;
+    }
+    
+    table.dataTable tbody tr:hover {
+        background-color: #eff6ff !important;
+    }
+    
+    .dt-buttons {
+        margin-bottom: 1rem;
+    }
+    
+    .dt-button {
+        background: linear-gradient(to right, #1e3a8a, #1e40af) !important;
+        color: white !important;
+        border: none !important;
+        padding: 0.5rem 1rem !important;
+        border-radius: 0.5rem !important;
+        margin-right: 0.5rem !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    .dt-button:hover {
+        background: linear-gradient(to right, #1e40af, #3b82f6) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .filter-container {
+        animation: slideDown 0.3s ease-out;
+    }
+</style>
     <style>
-        body {
-            min-height: 100vh;
-            overflow-x: hidden;
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
         }
-
-        .main-wrapper {
-            flex: 1;
-            transition: margin-left 0.3s ease;
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-
-        .sidebar {
-            width: 260px;
-            min-height: 100vh;
-            transition: all 0.3s ease;
-            background: linear-gradient(to top, #445db8, #667eea);
+        
+        .sidebar-enter {
+            animation: slideIn 0.3s ease-out;
         }
-
-        .sidebar-active {
-            background-color: #c3ccd8 !important;
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
         }
-
-
+        
+        .hover-scale {
+            transition: transform 0.2s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+        
         @media (max-width: 768px) {
-            /* .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: 1050;
-                background-color: #0e1e5a;
-                transform: translateX(0);
-            } */
-
-            .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: 1050;
-                height: 100vh;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-                /* smooth iOS scroll */
-            }
-
-            .sidebar.collapsed {
+            .sidebar-mobile {
                 transform: translateX(-100%);
+                transition: transform 0.3s ease;
             }
-
-            .main-wrapper {
-                margin-left: 0 !important;
+            
+            .sidebar-mobile.open {
+                transform: translateX(0);
             }
-        }
-
-
-        /* Force DataTables pagination to stay right-aligned on small screens */
-        .dataTables_wrapper .dataTables_paginate {
-            float: right !important;
-            /* always float right */
-            text-align: right !important;
-            margin-top: 10px;
-            /* optional spacing */
-        }
-
-        /* Optional: info text on left */
-        .dataTables_wrapper .dataTables_info {
-            float: left !important;
-            text-align: left !important;
-            margin-top: 10px;
-        }
-
-        /* Ensure bottom container is flex for small screens */
-        .dataTables_wrapper .dataTables_bottom {
-            display: flex !important;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            /* wrap for very small screens */
-        }
-
-        .buttonColor {
-            background-color: #3c5be4;
-            color: white;
-        }
-
-        .buttonColor:hover {
-            background-color: #3c5be4;
-            color: white;
-        }
-
-        .cursor-pointer {
-            cursor: pointer !important;
         }
     </style>
+    @stack('styles')
 </head>
-
-<body class="d-flex">
-
-
-    {{-- Sidebar --}}
-    @include('backend.layout.sidebar')
-
-    <div class="main-wrapper d-flex flex-column w-100">
-
-        {{-- Header --}}
-        @include('backend.layout.header')
-
-        {{-- Main Content --}}
-        <main class="flex-grow-1 p-4 bg-light">
-            @yield('content')
-        </main>
-
-        {{-- Footer --}}
-        @include('backend.layout.footer')
-
+<body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        @include('backend.layout.sidebar')
+        
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Topbar -->
+            @include('backend.layout.header')
+            
+            <!-- Page Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-4 md:p-6 lg:p-8">
+                @yield('content')
+            </main>
+        </div>
     </div>
-
-    @include('backend.layout.script')
+    
+    <!-- Mobile Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
+    
+    <script>
+        // Mobile sidebar toggle
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebarClose = document.getElementById('sidebar-close');
+        
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        }
+        
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', toggleSidebar);
+        }
+        
+        if (sidebarClose) {
+            sidebarClose.addEventListener('click', toggleSidebar);
+        }
+        
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+        }
+        
+        // Dropdown toggles
+        document.querySelectorAll('[data-dropdown-toggle]').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const dropdownId = this.getAttribute('data-dropdown-toggle');
+                const dropdown = document.getElementById(dropdownId);
+                
+                // Close other dropdowns
+                document.querySelectorAll('[data-dropdown]').forEach(d => {
+                    if (d.id !== dropdownId) {
+                        d.classList.add('hidden');
+                    }
+                });
+                
+                dropdown.classList.toggle('hidden');
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('[data-dropdown-toggle]')) {
+                document.querySelectorAll('[data-dropdown]').forEach(dropdown => {
+                    dropdown.classList.add('hidden');
+                });
+            }
+        });
+    </script>
+    
+    @stack('scripts')
 </body>
-
 </html>
