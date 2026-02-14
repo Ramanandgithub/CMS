@@ -9,6 +9,7 @@
 
 @section('content')
 
+
 <!-- Hero Section -->
 <!-- Tutorial Content Section -->
 <section class="mb-16">
