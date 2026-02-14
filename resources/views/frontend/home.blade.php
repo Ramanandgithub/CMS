@@ -10,263 +10,113 @@
 @section('content')
 
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-br from-primary to-secondary rounded-3xl p-10 md:p-16 lg:p-20 mb-16 overflow-hidden animate-fade-in">
-    <!-- Background Decorations -->
-    <div class="absolute -top-1/2 -right-1/5 w-[600px] h-[600px] bg-white/10 rounded-full"></div>
-    <div class="absolute -bottom-1/3 -left-1/10 w-[400px] h-[400px] bg-white/5 rounded-full"></div>
-    
-    <div class="relative z-10 max-w-4xl">
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-5 leading-tight">
-            Welcome to Rpoint Tech
-        </h1>
-        <p class="text-base md:text-lg text-white/90 mb-8 leading-relaxed">
-            Get access to 500+ tutorials from top instructors around the world in one place. 
-            Master programming, web development, data science, and more with our comprehensive guides.
+<!-- Tutorial Content Section -->
+<section class="mb-16">
+    <div class="bg-white rounded-lg shadow-sm p-8 lg:p-12">
+        
+        <!-- Main Heading -->
+        <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-3">What is Python?</h1>
+        <p class="text-sm text-gray-500 mb-8">Last Updated : 14 Feb 2026</p>
+        
+        <!-- Introduction Paragraph -->
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-6 text-justify">
+            Python is one of the most popular programming languages in the world. Many of you might question, what is the reason for this? The primary reason of this is because <a href="#" class="text-green-600 font-semibold hover:underline">Python</a> has the easiest syntax. Therefore, it is preferred by developers and companies for application development, web development, and to create software. With time and its advancement, the demand for Python is escalating, and there is a rapid growth of Python developers in Technological fields like <span class="text-green-700 font-semibold">Data Science, Data Analysis, Machine learning, Game Development and Automation Tasks</span>.
         </p>
         
-        <!-- Hero Search -->
-        <form action="" method="GET" class="relative max-w-2xl">
-            <input 
-                type="text" 
-                name="q" 
-                class="w-full py-4 md:py-5 pr-36 md:pr-44 pl-6 border-0 rounded-full text-base shadow-[0_10px_30px_rgba(0,0,0,0.2)] focus:outline-none focus:ring-2 focus:ring-white/50" 
-                placeholder="Search tutorials, languages, topics..."
-                autocomplete="off"
-            >
-            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 py-3 px-6 md:px-9 bg-gradient-to-r from-accent to-[#FF9800] text-dark-bg rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-[0_5px_20px_rgba(255,193,7,0.4)]">
-                <i class="fas fa-search"></i> <span class="hidden sm:inline">Search</span>
-            </button>
-        </form>
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-10 text-justify">
+            Whether you are an aspiring programmer or are looking to build your career in Python, you should have the fundamental knowledge about Python, its definition, <a href="#" class="text-green-600 hover:underline">history</a>, <a href="#" class="text-green-600 hover:underline">advantages</a>, <a href="#" class="text-green-600 hover:underline">disadvantages</a> and its real-time based applications.
+        </p>
         
-        <!-- Hero Stats -->
-        <div class="flex flex-wrap gap-6 md:gap-10 mt-10">
-            <div class="text-center">
-                <span class="block text-3xl md:text-4xl font-bold text-accent">500+</span>
-                <span class="text-white/80 text-sm mt-1 block">Tutorials</span>
+        <!-- Subheading -->
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">What is Python?</h2>
+        
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-10 text-justify">
+            Python is an <span class="font-bold text-gray-900">open-source, object-oriented, high-level programming</span> language. It provides user-friendly syntax because it resembles the natural English language. It can be integrated into any project and used to <span class="font-bold text-gray-900">solve advanced problems.</span> Python has a large library of predefined modules and functions, it provides different frameworks for all sorts of development, whether it is for the backend or the frontend.
+        </p>
+        
+        <!-- History Section -->
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">History</h2>
+        
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-10 text-justify">
+            In 1980, Python was introduced by Guido van Rossum. He was doing research in the Netherlands at CWI (Centrum Wiskunde & Informatica). Python was designed as a successor to the ABC programming language. The first version, Python 0.9.0, was released in February 1991. Since then, Python has evolved through various versions, with Python 2.0 released in 2000 and Python 3.0 in 2008. Today, Python 3.x is the current and actively maintained version.
+        </p>
+        
+        <!-- Features Section -->
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">Python Features</h2>
+        
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-6 text-justify">
+            Python has become one of the most popular programming languages due to its extensive features and capabilities. Here are some key features that make Python stand out:
+        </p>
+        
+        <ul class="space-y-4 mb-10 ml-6">
+            <li class="text-base lg:text-lg text-gray-700 leading-relaxed">
+                <span class="font-semibold text-gray-900">• Easy to Learn and Use:</span> Python has a simple syntax that resembles the English language, making it beginner-friendly and easy to read and write.
+            </li>
+            <li class="text-base lg:text-lg text-gray-700 leading-relaxed">
+                <span class="font-semibold text-gray-900">• Interpreted Language:</span> Python code is executed line by line, which makes debugging easier and faster.
+            </li>
+            <li class="text-base lg:text-lg text-gray-700 leading-relaxed">
+                <span class="font-semibold text-gray-900">• Object-Oriented:</span> Python supports object-oriented programming concepts like classes, objects, inheritance, and polymorphism.
+            </li>
+            <li class="text-base lg:text-lg text-gray-700 leading-relaxed">
+                <span class="font-semibold text-gray-900">• Extensive Libraries:</span> Python has a vast collection of libraries and frameworks for web development, data science, machine learning, and more.
+            </li>
+            <li class="text-base lg:text-lg text-gray-700 leading-relaxed">
+                <span class="font-semibold text-gray-900">• Cross-Platform:</span> Python runs on various platforms including Windows, macOS, Linux, and Unix systems.
+            </li>
+            <li class="text-base lg:text-lg text-gray-700 leading-relaxed">
+                <span class="font-semibold text-gray-900">• Large Community Support:</span> Python has a massive community of developers who contribute to its development and provide support.
+            </li>
+        </ul>
+        
+        <!-- Advantages Section -->
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">Advantages of Python</h2>
+        
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-10 text-justify">
+            Python offers numerous advantages that make it a preferred choice for developers worldwide. Its simplicity, versatility, and powerful libraries enable rapid development and deployment of applications. Python is widely used in web development, data analysis, artificial intelligence, scientific computing, automation, and many other domains. The language's readability and maintainability reduce development time and costs significantly.
+        </p>
+        
+        <!-- Applications Section -->
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">Python Applications</h2>
+        
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-6 text-justify">
+            Python is used in various real-world applications across different industries:
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            <div class="bg-green-50 border-l-4 border-green-600 p-6 rounded-r-lg">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Web Development</h3>
+                <p class="text-gray-700">Frameworks like Django and Flask enable rapid web application development.</p>
             </div>
-            <div class="text-center">
-                <span class="block text-3xl md:text-4xl font-bold text-accent">50K+</span>
-                <span class="text-white/80 text-sm mt-1 block">Students</span>
+            <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Data Science</h3>
+                <p class="text-gray-700">Libraries like Pandas, NumPy, and Matplotlib for data analysis and visualization.</p>
             </div>
-            <div class="text-center">
-                <span class="block text-3xl md:text-4xl font-bold text-accent">25+</span>
-                <span class="text-white/80 text-sm mt-1 block">Topics</span>
+            <div class="bg-purple-50 border-l-4 border-purple-600 p-6 rounded-r-lg">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Machine Learning</h3>
+                <p class="text-gray-700">TensorFlow, Keras, and Scikit-learn for building AI models.</p>
+            </div>
+            <div class="bg-orange-50 border-l-4 border-orange-600 p-6 rounded-r-lg">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Automation</h3>
+                <p class="text-gray-700">Automating repetitive tasks, testing, and scripting.</p>
             </div>
         </div>
-    </div>
-    
-    <!-- Hero Image -->
-    <div class="hidden lg:block absolute right-10 top-1/2 -translate-y-1/2 max-w-md z-20">
-        <img data-src="{{ asset('images/hero-illustration.png') }}" alt="Learning Illustration" class="w-full rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)]" loading="lazy">
-    </div>
-</section>
-
-<!-- Popular Categories Section -->
-<section class="mb-16">
-    <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-text-dark mb-4">Explore Popular Categories</h2>
-        <p class="text-base text-text-light max-w-2xl mx-auto">
-            Choose from a wide range of programming languages and technologies
+        
+        <!-- Conclusion Paragraph -->
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed mb-6 text-justify">
+            Python continues to grow in popularity and remains one of the most in-demand programming languages in the job market. Its versatility and ease of use make it an excellent choice for beginners while being powerful enough for experienced developers to build complex applications.
         </p>
-    </div>
-    
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        <a href="" class="block bg-white rounded-2xl p-8 text-center transition-all duration-300 border-2 border-transparent hover:-translate-y-2 hover:shadow-2xl hover:border-primary no-underline">
-            <div class="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-5 text-4xl text-white transition-all duration-300 hover:scale-110 hover:rotate-6">
-                <i class="fab fa-python"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-text-dark mb-2">Python</h3>
-            <p class="text-text-light text-sm">150+ Tutorials</p>
-        </a>
         
-        <a href="" class="block bg-white rounded-2xl p-8 text-center transition-all duration-300 border-2 border-transparent hover:-translate-y-2 hover:shadow-2xl hover:border-primary no-underline">
-            <div class="w-20 h-20 bg-gradient-to-br from-[#f89820] to-[#e16428] rounded-2xl flex items-center justify-center mx-auto mb-5 text-4xl text-white transition-all duration-300 hover:scale-110 hover:rotate-6">
-                <i class="fab fa-java"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-text-dark mb-2">Java</h3>
-            <p class="text-text-light text-sm">120+ Tutorials</p>
-        </a>
-        
-        <a href="" class="block bg-white rounded-2xl p-8 text-center transition-all duration-300 border-2 border-transparent hover:-translate-y-2 hover:shadow-2xl hover:border-primary no-underline">
-            <div class="w-20 h-20 bg-gradient-to-br from-[#f7df1e] to-[#e4c000] rounded-2xl flex items-center justify-center mx-auto mb-5 text-4xl text-white transition-all duration-300 hover:scale-110 hover:rotate-6">
-                <i class="fab fa-js"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-text-dark mb-2">JavaScript</h3>
-            <p class="text-text-light text-sm">180+ Tutorials</p>
-        </a>
-        
-        <a href="" class="block bg-white rounded-2xl p-8 text-center transition-all duration-300 border-2 border-transparent hover:-translate-y-2 hover:shadow-2xl hover:border-primary no-underline">
-            <div class="w-20 h-20 bg-gradient-to-br from-[#61dafb] to-[#21a1c4] rounded-2xl flex items-center justify-center mx-auto mb-5 text-4xl text-white transition-all duration-300 hover:scale-110 hover:rotate-6">
-                <i class="fab fa-react"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-text-dark mb-2">React</h3>
-            <p class="text-text-light text-sm">90+ Tutorials</p>
-        </a>
-        
-        <a href="" class="block bg-white rounded-2xl p-8 text-center transition-all duration-300 border-2 border-transparent hover:-translate-y-2 hover:shadow-2xl hover:border-primary no-underline">
-            <div class="w-20 h-20 bg-gradient-to-br from-[#68a063] to-[#44883e] rounded-2xl flex items-center justify-center mx-auto mb-5 text-4xl text-white transition-all duration-300 hover:scale-110 hover:rotate-6">
-                <i class="fab fa-node-js"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-text-dark mb-2">Node.js</h3>
-            <p class="text-text-light text-sm">75+ Tutorials</p>
-        </a>
-        
-        <a href="" class="block bg-white rounded-2xl p-8 text-center transition-all duration-300 border-2 border-transparent hover:-translate-y-2 hover:shadow-2xl hover:border-primary no-underline">
-            <div class="w-20 h-20 bg-gradient-to-br from-[#8e44ad] to-[#6c3483] rounded-2xl flex items-center justify-center mx-auto mb-5 text-4xl text-white transition-all duration-300 hover:scale-110 hover:rotate-6">
-                <i class="fas fa-robot"></i>
-            </div>
-            <h3 class="text-xl font-semibold text-text-dark mb-2">AI & ML</h3>
-            <p class="text-text-light text-sm">100+ Tutorials</p>
-        </a>
-    </div>
-</section>
-
-<!-- Latest Tutorials Section -->
-<section class="mb-16">
-    <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-text-dark mb-4">Latest Tutorials</h2>
-        <p class="text-base text-text-light max-w-2xl mx-auto">
-            Recently added tutorials to help you learn and grow
-        </p>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        @forelse($latestTutorials ?? [] as $tutorial)
-            <a href="" class="block bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl no-underline">
-                <img 
-                    data-src="{{ $tutorial->image ?? asset('images/default-tutorial.jpg') }}" 
-                    alt="{{ $tutorial->title }}" 
-                    class="w-full h-52 object-cover bg-gradient-to-br from-primary to-secondary"
-                    loading="lazy"
-                >
-                <div class="p-6">
-                    <span class="inline-block py-1 px-4 bg-gradient-to-r from-accent to-[#FF9800] text-dark-bg text-xs font-semibold rounded-full mb-4">{{ $tutorial->category }}</span>
-                    <h3 class="text-lg font-semibold text-text-dark mb-2 leading-snug">{{ $tutorial->title }}</h3>
-                    <p class="text-text-light text-sm leading-relaxed mb-4">
-                        {{ Str::limit($tutorial->description, 100) }}
-                    </p>
-                    <div class="flex items-center justify-between pt-4 border-t border-light-bg">
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-xs font-semibold">
-                                {{ strtoupper(substr($tutorial->author, 0, 1)) }}
-                            </div>
-                            <span class="text-[13px] text-text-dark font-medium">{{ $tutorial->author }}</span>
-                        </div>
-                        <div class="flex gap-4 text-[13px] text-text-light">
-                            <span>
-                                <i class="fas fa-eye mr-1"></i>
-                                {{ $tutorial->views }}
-                            </span>
-                            <span>
-                                <i class="fas fa-clock mr-1"></i>
-                                {{ $tutorial->reading_time }} min
-                            </span>
-                        </div>
-                    </div>
-                </div>
+        <!-- Call to Action -->
+        <div class="bg-gradient-to-r from-green-50 to-teal-50 border border-green-200 rounded-lg p-8 text-center mt-12">
+            <h3 class="text-2xl font-bold text-gray-900 mb-3">Ready to Start Learning Python?</h3>
+            <p class="text-gray-700 mb-6">Join thousands of students and master Python programming with our comprehensive tutorials.</p>
+            <a href="#" class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-300">
+                Start Tutorial Now
             </a>
-        @empty
-            <!-- Placeholder Cards -->
-            @for($i = 1; $i <= 6; $i++)
-                <a href="#" class="block bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl no-underline">
-                    <div class="w-full h-52 bg-gradient-to-br from-primary to-secondary"></div>
-                    <div class="p-6">
-                        <span class="inline-block py-1 px-4 bg-gradient-to-r from-accent to-[#FF9800] text-dark-bg text-xs font-semibold rounded-full mb-4">Python</span>
-                        <h3 class="text-lg font-semibold text-text-dark mb-2 leading-snug">Python Tutorial {{ $i }}</h3>
-                        <p class="text-text-light text-sm leading-relaxed mb-4">
-                            Learn Python programming from basics to advanced concepts with practical examples.
-                        </p>
-                        <div class="flex items-center justify-between pt-4 border-t border-light-bg">
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-xs font-semibold">T</div>
-                                <span class="text-[13px] text-text-dark font-medium">Tpoint Instructor</span>
-                            </div>
-                            <div class="flex gap-4 text-[13px] text-text-light">
-                                <span><i class="fas fa-eye mr-1"></i> {{ rand(100, 1000) }}</span>
-                                <span><i class="fas fa-clock mr-1"></i> {{ rand(5, 15) }} min</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            @endfor
-        @endforelse
-    </div>
-    
-    <div class="text-center">
-        <a href="" class="inline-block py-4 px-10 bg-gradient-to-r from-accent to-[#FF9800] text-dark-bg rounded-full text-base font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(255,193,7,0.4)] no-underline">
-            View All Tutorials <i class="fas fa-arrow-right ml-1"></i>
-        </a>
-    </div>
-</section>
-
-<!-- Features Section -->
-<section class="bg-light-bg rounded-3xl p-10 md:p-16 mb-16">
-    <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-text-dark mb-4">Why Choose Tpoint Tech?</h2>
-        <p class="text-base text-text-light max-w-2xl mx-auto">
-            Everything you need to master programming and technology
-        </p>
-    </div>
-    
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-10">
-        <div class="text-center">
-            <div class="w-[70px] h-[70px] bg-white rounded-full flex items-center justify-center mx-auto mb-5 text-3xl text-primary shadow-sm">
-                <i class="fas fa-book-open"></i>
-            </div>
-            <h3 class="text-lg font-semibold text-text-dark mb-2">Comprehensive Content</h3>
-            <p class="text-text-light text-sm leading-relaxed">
-                500+ in-depth tutorials covering all major programming languages and frameworks
-            </p>
         </div>
         
-        <div class="text-center">
-            <div class="w-[70px] h-[70px] bg-white rounded-full flex items-center justify-center mx-auto mb-5 text-3xl text-primary shadow-sm">
-                <i class="fas fa-user-graduate"></i>
-            </div>
-            <h3 class="text-lg font-semibold text-text-dark mb-2">Expert Instructors</h3>
-            <p class="text-text-light text-sm leading-relaxed">
-                Learn from industry professionals with years of real-world experience
-            </p>
-        </div>
-        
-        <div class="text-center">
-            <div class="w-[70px] h-[70px] bg-white rounded-full flex items-center justify-center mx-auto mb-5 text-3xl text-primary shadow-sm">
-                <i class="fas fa-code"></i>
-            </div>
-            <h3 class="text-lg font-semibold text-text-dark mb-2">Hands-on Practice</h3>
-            <p class="text-text-light text-sm leading-relaxed">
-                Interactive code examples and exercises to reinforce your learning
-            </p>
-        </div>
-        
-        <div class="text-center">
-            <div class="w-[70px] h-[70px] bg-white rounded-full flex items-center justify-center mx-auto mb-5 text-3xl text-primary shadow-sm">
-                <i class="fas fa-mobile-alt"></i>
-            </div>
-            <h3 class="text-lg font-semibold text-text-dark mb-2">Learn Anywhere</h3>
-            <p class="text-text-light text-sm leading-relaxed">
-                Access tutorials on any device - desktop, tablet, or mobile
-            </p>
-        </div>
     </div>
-</section>
-
-<!-- CTA Section -->
-<section class="bg-gradient-to-br from-[#1a1a2e] to-[#16213e] rounded-3xl p-10 md:p-16 text-center text-white">
-    <h2 class="text-3xl md:text-4xl font-bold mb-5">Ready to Start Learning?</h2>
-    <p class="text-base text-white/80 mb-8 max-w-2xl mx-auto">
-        Join thousands of students already learning with Tpoint Tech. 
-        Get started today and take your programming skills to the next level.
-    </p>
-    @guest
-        <a href="" class="inline-block py-4 px-10 bg-gradient-to-r from-accent to-[#FF9800] text-dark-bg rounded-full text-base font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(255,193,7,0.4)] no-underline">
-            <i class="fas fa-user-plus mr-1"></i> Sign Up Now
-        </a>
-    @else
-        <a href="" class="inline-block py-4 px-10 bg-gradient-to-r from-accent to-[#FF9800] text-dark-bg rounded-full text-base font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(255,193,7,0.4)] no-underline">
-            <i class="fas fa-book mr-1"></i> Browse Tutorials
-        </a>
-    @endguest
 </section>
 
 @endsection

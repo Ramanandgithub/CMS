@@ -58,6 +58,19 @@
         }
     </script>
     
+    <style>
+        /* Ensure sidebar starts below navbar */
+        #sidebar {
+            top: 0;
+            padding-top: 0;
+        }
+        
+        /* Adjust for navbar height if it's fixed */
+        .navbar-spacer {
+            height: var(--navbar-height, 0);
+        }
+    </style>
+    
     @stack('styles')
 </head>
 <body class="font-sans bg-light-bg text-text-dark overflow-x-hidden">
@@ -66,18 +79,22 @@
         <div class="w-12 h-12 border-4 border-light-bg border-t-primary rounded-full animate-spin-slow"></div>
     </div>
     
-    <!-- Main Wrapper -->
-    <div class="flex min-h-screen relative">
-        <!-- Sidebar -->
-        @include('frontend.sidebar.sidebar')
+    <!-- Top Navigation Bar (Full Width) -->
+    <div class="w-full relative z-50">
+        @include('frontend.topbar.index')
+    </div>
+    
+    <!-- Main Wrapper (Below Navbar) -->
+    <div class="flex min-h-screen relative pt-0">
+        <!-- Sidebar (Left) - starts from top of this container -->
+        <div class="sidebar-wrapper">
+            @include('frontend.sidebar.sidebar')
+        </div>
         
-        <!-- Main Content -->
+        <!-- Main Content (Right) -->
         <div class="flex-1 transition-all duration-300 ease-in-out ml-0 lg:ml-[280px] relative z-10" id="mainContent">
-            <!-- Top Navigation Bar -->
-            @include('frontend.topbar.index')
-            
             <!-- Page Content -->
-            <div class="p-5 max-w-screen-2xl mx-auto animate-fade-in">
+            <div class="p-5 max-w-screen-2xl mx-auto animate-fade-in mt-20">
                 @yield('content')
             </div>
             
