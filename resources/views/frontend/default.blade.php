@@ -53,79 +53,8 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Top Navigation -->
-    <nav class="bg-white shadow-sm">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-gray-900 flex items-center justify-center text-white font-bold text-xl">
-                        T
-                    </div>
-                    <span class="text-2xl font-bold text-gray-900">point Tech</span>
-                </div>
-                
-                <!-- Menu Items -->
-                <div class="hidden lg:flex items-center gap-8">
-                    <div class="relative group">
-                        <button class="flex items-center gap-1 text-gray-900 font-medium hover:text-teal-600">
-                            Tutorials
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                    </div>
-                    <div class="relative group">
-                        <button class="flex items-center gap-1 text-gray-900 font-medium hover:text-teal-600">
-                            Interviews
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                    </div>
-                    <div class="relative group">
-                        <button class="flex items-center gap-1 text-gray-900 font-medium hover:text-teal-600">
-                            Compilers
-                            <i class="fas fa-chevron-down text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Theme Toggles -->
-                <div class="flex items-center gap-2">
-                    <button class="w-8 h-8 rounded-full bg-gray-300 hover:bg-gray-400"></button>
-                    <button class="w-8 h-8 rounded-full bg-teal-500 hover:bg-teal-600"></button>
-                    <button class="w-8 h-8 rounded-full bg-gray-800 hover:bg-gray-900"></button>
-                    <button class="w-8 h-8 rounded-full bg-indigo-900 hover:bg-indigo-950"></button>
-                    <button class="w-8 h-8 rounded-full bg-teal-700 hover:bg-teal-800"></button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Category Navigation Bar -->
-    <div class="bg-teal-700">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center gap-6 overflow-x-auto py-3">
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Python</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Java</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">JavaScript</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">SQL</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">C</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">C++</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">HTML</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">CSS</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">React</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Node.js</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Spring Boot</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">C#</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">PHP</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">MySQL</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">MongoDB</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">AI</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">ML</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">DSA</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">DBMS</a>
-                <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">OS</a>
-            </div>
-        </div>
-    </div>
+    
+    @include('frontend.topbar.index')
 
     <!-- Main Content -->
     <div class="container mx-auto px-6 py-12">
@@ -152,7 +81,7 @@
                 <!-- Left Content -->
                 <div>
                     <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                        Welcome to Tpoint Tech
+                        Welcome to Rpoint Tech
                     </h1>
                     <p class="text-lg text-gray-700 mb-8 leading-relaxed">
                         Get access to 500+ tutorials from top instructors around the world in one place.
@@ -671,64 +600,7 @@
     </button>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <!-- About -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4">About Tpoint Tech</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Your one-stop destination for learning programming languages and technologies. Get access to 500+ tutorials from top instructors.
-                    </p>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-teal-400 text-sm">Home</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-teal-400 text-sm">Tutorials</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-teal-400 text-sm">Interviews</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-teal-400 text-sm">Compilers</a></li>
-                    </ul>
-                </div>
-
-                <!-- Popular Topics -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4">Popular Topics</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-teal-400 text-sm">Python</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-teal-400 text-sm">Java</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-teal-400 text-sm">JavaScript</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-teal-400 text-sm">Data Structures</a></li>
-                    </ul>
-                </div>
-
-                <!-- Connect -->
-                <div>
-                    <h3 class="font-bold text-lg mb-4">Connect With Us</h3>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-all">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-all">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-all">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-teal-600 transition-all">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-t border-gray-800 pt-8 text-center">
-                <p class="text-gray-400 text-sm">&copy; 2024 Tpoint Tech. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    @include('frontend.footer.index')
 
     <!-- Scripts -->
     <script>
