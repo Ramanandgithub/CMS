@@ -1,241 +1,206 @@
-<aside class="print:hidden fixed top-0 -left-[280px] w-[280px] h-screen bg-gradient-to-b from-[#1a1a2e] to-[#16213e] shadow-[4px_0_20px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out z-[1050] overflow-y-auto overflow-x-hidden lg:left-0" id="sidebar">
+<aside class="print:hidden fixed top-[124px] left-0 w-[280px] h-[calc(100vh-124px)] bg-white shadow-lg transition-all duration-300 ease-in-out z-[1040] overflow-y-auto overflow-x-hidden border-r border-gray-200 mt-[116px]" id="sidebar">
     
-    <!-- Sidebar Header -->
-    <div class="p-6 bg-black/20 border-b border-white/10">
-        <a href="" class="flex items-center text-white text-2xl font-bold transition-all duration-300 hover:text-accent hover:translate-x-1 no-underline">
-            <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center mr-3 text-xl">
-                <i class="fas fa-graduation-cap"></i>
-            </div>
-            <span>Tpoint Tech</span>
-        </a>
-    </div>
-    
-    <!-- Sidebar Menu -->
-    <div class="py-5">
-        <!-- Main Navigation -->
-        <div class="text-white/50 text-xs font-semibold uppercase tracking-wider px-5 py-4 mt-2">Main Navigation</div>
+    <!-- Sidebar Content -->
+    <div class="py-4">
         
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 {{ request()->routeIs('home') ? 'text-white bg-white/10 before:scale-y-100' : '' }} no-underline">
-                <i class="fas fa-home w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">Home</span>
-            </a>
-        </div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 {{ request()->routeIs('tutorials.*') ? 'text-white bg-white/10 before:scale-y-100' : '' }} no-underline">
-                <i class="fas fa-book w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">All Tutorials</span>
-                <span class="bg-accent text-dark-bg text-[11px] font-bold px-2 py-0.5 rounded-xl">500+</span>
-            </a>
-        </div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 {{ request()->routeIs('search') ? 'text-white bg-white/10 before:scale-y-100' : '' }} no-underline">
-                <i class="fas fa-search w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">Search</span>
-            </a>
-        </div>
-        
-        <!-- Programming Languages -->
-        <div class="text-white/50 text-xs font-semibold uppercase tracking-wider px-5 py-4 mt-2">Programming Languages</div>
-        
-        <div class="relative menu-item">
-            <a href="javascript:void(0)" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline" onclick="toggleSubmenu(this)">
-                <i class="fab fa-python w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">Python</span>
-                <i class="fas fa-chevron-right text-xs transition-transform duration-300 menu-arrow"></i>
-            </a>
-            <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-black/20 submenu">
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">Python Tutorial</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">Django</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">Flask</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">Selenium Python</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">NumPy</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">Pandas</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">PyTorch</a>
-            </div>
-        </div>
-        
-        <div class="relative menu-item">
-            <a href="javascript:void(0)" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline" onclick="toggleSubmenu(this)">
-                <i class="fab fa-java w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">Java</span>
-                <i class="fas fa-chevron-right text-xs transition-transform duration-300 menu-arrow"></i>
-            </a>
-            <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-black/20 submenu">
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">Java Tutorial</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">Spring Boot</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">Hibernate</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">JSP</a>
-            </div>
-        </div>
-        
-        <div class="relative menu-item">
-            <a href="javascript:void(0)" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline" onclick="toggleSubmenu(this)">
-                <i class="fab fa-js w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">JavaScript</span>
-                <i class="fas fa-chevron-right text-xs transition-transform duration-300 menu-arrow"></i>
-            </a>
-            <div class="max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-black/20 submenu">
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">JavaScript Tutorial</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">React</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">Node.js</a>
-                <a href="" class="block py-2.5 pl-[55px] pr-5 text-white/70 text-[13px] transition-all duration-300 relative hover:text-white hover:bg-white/5 hover:pl-[60px] before:content-['•'] before:absolute before:left-10 before:text-secondary no-underline">Vue.js</a>
-            </div>
-        </div>
-        
-        <!-- Databases -->
-        <div class="text-white/50 text-xs font-semibold uppercase tracking-wider px-5 py-4 mt-2">Databases</div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                <i class="fas fa-database w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">SQL</span>
-            </a>
-        </div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                <i class="fas fa-database w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">MySQL</span>
-            </a>
-        </div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                <i class="fas fa-leaf w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">MongoDB</span>
-            </a>
-        </div>
-        
-        <!-- Web Development -->
-        <div class="text-white/50 text-xs font-semibold uppercase tracking-wider px-5 py-4 mt-2">Web Development</div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                <i class="fab fa-html5 w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">HTML</span>
-            </a>
-        </div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                <i class="fab fa-css3-alt w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">CSS</span>
-            </a>
-        </div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                <i class="fab fa-php w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">PHP</span>
-            </a>
-        </div>
-        
-        <!-- Other Topics -->
-        <div class="text-white/50 text-xs font-semibold uppercase tracking-wider px-5 py-4 mt-2">Other Topics</div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                <i class="fas fa-robot w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">AI</span>
-            </a>
-        </div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                <i class="fas fa-brain w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">Machine Learning</span>
-            </a>
-        </div>
-        
-        <div class="relative">
-            <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                <i class="fas fa-project-diagram w-5 text-lg mr-4 text-center"></i>
-                <span class="flex-1 text-sm font-medium">DSA</span>
-            </a>
-        </div>
-        
-        <!-- User Section -->
-        <div class="text-white/50 text-xs font-semibold uppercase tracking-wider px-5 py-4 mt-2">Account</div>
-        
-        @auth
-            <div class="relative">
-                <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                    <i class="fas fa-user w-5 text-lg mr-4 text-center"></i>
-                    <span class="flex-1 text-sm font-medium">Profile</span>
-                </a>
-            </div>
+        <!-- Dynamic Topic Menu -->
+        <div class="topic-menu">
             
-            <div class="relative">
-                <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                    <i class="fas fa-bookmark w-5 text-lg mr-4 text-center"></i>
-                    <span class="flex-1 text-sm font-medium">Bookmarks</span>
-                </a>
-            </div>
-            
-            <div class="relative">
-                <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                    <i class="fas fa-chart-line w-5 text-lg mr-4 text-center"></i>
-                    <span class="flex-1 text-sm font-medium">My Progress</span>
-                </a>
-            </div>
-        @else
-            <div class="relative">
-                <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                    <i class="fas fa-sign-in-alt w-5 text-lg mr-4 text-center"></i>
-                    <span class="flex-1 text-sm font-medium">Login</span>
-                </a>
-            </div>
-            
-            <div class="relative">
-                <a href="" class="flex items-center px-5 py-3 text-white/80 transition-all duration-300 relative overflow-hidden hover:text-white hover:bg-white/10 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-accent before:scale-y-0 before:transition-transform before:duration-300 hover:before:scale-y-100 no-underline">
-                    <i class="fas fa-user-plus w-5 text-lg mr-4 text-center"></i>
-                    <span class="flex-1 text-sm font-medium">Register</span>
-                </a>
-            </div>
-        @endauth
-        
-        <!-- Add bottom padding to prevent footer overlap -->
-        <div class="h-32"></div>
-    </div>
-    
-    <!-- Sidebar Footer -->
-    @auth
-        <div class="absolute bottom-0 left-0 right-0 p-5 bg-black/30 border-t border-white/10">
-            <div class="flex items-center text-white">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-[#FF9800] flex items-center justify-center mr-3 font-bold">
-                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                </div>
-                <div class="flex-1">
-                    <div class="text-sm font-semibold mb-0.5">{{ auth()->user()->name }}</div>
-                    <div class="text-xs text-white/60">Student</div>
+            <!-- Python Tutorial Section -->
+            <div class="topic-section">
+                <button class="topic-header w-full flex items-center justify-between px-5 py-3 text-left text-gray-800 font-semibold hover:bg-gray-50 transition-colors" onclick="toggleTopic(this)">
+                    <span class="text-base">Python Tutorial</span>
+                    <i class="fas fa-chevron-down text-sm transition-transform duration-300 topic-arrow"></i>
+                </button>
+                <div class="topic-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                    <div class="py-2">
+                        <!-- Subtopic: Python Variable & Data Type -->
+                        <div class="subtopic-section">
+                            <button class="subtopic-header w-full flex items-center justify-between px-5 py-2 text-left text-gray-700 font-medium hover:bg-gray-100 transition-colors" onclick="toggleSubtopic(this)">
+                                <span class="text-sm">Python Variable & Data Type</span>
+                                <i class="fas fa-chevron-up text-xs transition-transform duration-300 subtopic-arrow"></i>
+                            </button>
+                            <div class="subtopic-content max-h-96 overflow-hidden transition-all duration-300">
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Variables</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Data Types</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Numbers</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Type Casting in Python</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Strings</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python String Methods</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Boolean</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Subtopic: Python Control Statements -->
+                        <div class="subtopic-section">
+                            <button class="subtopic-header w-full flex items-center justify-between px-5 py-2 text-left text-gray-700 font-medium hover:bg-gray-100 transition-colors" onclick="toggleSubtopic(this)">
+                                <span class="text-sm">Python Control Statements</span>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-300 subtopic-arrow"></i>
+                            </button>
+                            <div class="subtopic-content max-h-0 overflow-hidden transition-all duration-300">
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python If else</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Loops</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python For Loop</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python While Loop</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Continue</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Break</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Pass</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Difference between Break and Continue</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Subtopic: Python Functions -->
+                        <div class="subtopic-section">
+                            <button class="subtopic-header w-full flex items-center justify-between px-5 py-2 text-left text-gray-700 font-medium hover:bg-gray-100 transition-colors" onclick="toggleSubtopic(this)">
+                                <span class="text-sm">Python Functions</span>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-300 subtopic-arrow"></i>
+                            </button>
+                            <div class="subtopic-content max-h-0 overflow-hidden transition-all duration-300">
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Functions</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Lambda</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Arrays</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Subtopic: Python Lists -->
+                        <div class="subtopic-section">
+                            <button class="subtopic-header w-full flex items-center justify-between px-5 py-2 text-left text-gray-700 font-medium hover:bg-gray-100 transition-colors" onclick="toggleSubtopic(this)">
+                                <span class="text-sm">Python Lists</span>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-300 subtopic-arrow"></i>
+                            </button>
+                            <div class="subtopic-content max-h-0 overflow-hidden transition-all duration-300">
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Lists</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">List Methods</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">List Comprehension</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Subtopic: Python OOPs -->
+                        <div class="subtopic-section">
+                            <button class="subtopic-header w-full flex items-center justify-between px-5 py-2 text-left text-gray-700 font-medium hover:bg-gray-100 transition-colors" onclick="toggleSubtopic(this)">
+                                <span class="text-sm">Python OOPs</span>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-300 subtopic-arrow"></i>
+                            </button>
+                            <div class="subtopic-content max-h-0 overflow-hidden transition-all duration-300">
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Classes & Objects</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Inheritance</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Polymorphism</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Python Encapsulation</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <!-- Java Tutorial Section -->
+            <div class="topic-section border-t border-gray-200">
+                <button class="topic-header w-full flex items-center justify-between px-5 py-3 text-left text-gray-800 font-semibold hover:bg-gray-50 transition-colors" onclick="toggleTopic(this)">
+                    <span class="text-base">Java Tutorial</span>
+                    <i class="fas fa-chevron-down text-sm transition-transform duration-300 topic-arrow"></i>
+                </button>
+                <div class="topic-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                    <div class="py-2">
+                        <div class="subtopic-section">
+                            <button class="subtopic-header w-full flex items-center justify-between px-5 py-2 text-left text-gray-700 font-medium hover:bg-gray-100 transition-colors" onclick="toggleSubtopic(this)">
+                                <span class="text-sm">Java Basics</span>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-300 subtopic-arrow"></i>
+                            </button>
+                            <div class="subtopic-content max-h-0 overflow-hidden transition-all duration-300">
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Java Introduction</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Java Variables</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Java Data Types</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">Java Operators</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- JavaScript Tutorial Section -->
+            <div class="topic-section border-t border-gray-200">
+                <button class="topic-header w-full flex items-center justify-between px-5 py-3 text-left text-gray-800 font-semibold hover:bg-gray-50 transition-colors" onclick="toggleTopic(this)">
+                    <span class="text-base">JavaScript Tutorial</span>
+                    <i class="fas fa-chevron-down text-sm transition-transform duration-300 topic-arrow"></i>
+                </button>
+                <div class="topic-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                    <div class="py-2">
+                        <div class="subtopic-section">
+                            <button class="subtopic-header w-full flex items-center justify-between px-5 py-2 text-left text-gray-700 font-medium hover:bg-gray-100 transition-colors" onclick="toggleSubtopic(this)">
+                                <span class="text-sm">JavaScript Basics</span>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-300 subtopic-arrow"></i>
+                            </button>
+                            <div class="subtopic-content max-h-0 overflow-hidden transition-all duration-300">
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">JS Introduction</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">JS Variables</a>
+                                <a href="#" class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">JS Data Types</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Web Development Section -->
+            <div class="topic-section border-t border-gray-200">
+                <button class="topic-header w-full flex items-center justify-between px-5 py-3 text-left text-gray-800 font-semibold hover:bg-gray-50 transition-colors" onclick="toggleTopic(this)">
+                    <span class="text-base">Web Development</span>
+                    <i class="fas fa-chevron-down text-sm transition-transform duration-300 topic-arrow"></i>
+                </button>
+                <div class="topic-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                    <div class="py-2">
+                        <a href="#" class="block px-5 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors">HTML Tutorial</a>
+                        <a href="#" class="block px-5 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors">CSS Tutorial</a>
+                        <a href="#" class="block px-5 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors">PHP Tutorial</a>
+                        <a href="#" class="block px-5 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors">React Tutorial</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Database Section -->
+            <div class="topic-section border-t border-gray-200">
+                <button class="topic-header w-full flex items-center justify-between px-5 py-3 text-left text-gray-800 font-semibold hover:bg-gray-50 transition-colors" onclick="toggleTopic(this)">
+                    <span class="text-base">Databases</span>
+                    <i class="fas fa-chevron-down text-sm transition-transform duration-300 topic-arrow"></i>
+                </button>
+                <div class="topic-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
+                    <div class="py-2">
+                        <a href="#" class="block px-5 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors">SQL Tutorial</a>
+                        <a href="#" class="block px-5 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors">MySQL Tutorial</a>
+                        <a href="#" class="block px-5 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors">MongoDB Tutorial</a>
+                        <a href="#" class="block px-5 py-2 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors">PostgreSQL Tutorial</a>
+                    </div>
+                </div>
+            </div>
+            
         </div>
-    @endauth
+        
+        <!-- Add bottom padding -->
+        <div class="h-20"></div>
+    </div>
 </aside>
 
 <!-- Sidebar Overlay for Mobile -->
-<div class="fixed top-0 left-0 w-full h-full bg-black/50 opacity-0 invisible transition-all duration-300 z-[1040] lg:hidden sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<div class="fixed top-0 left-0 w-full h-full bg-black/50 opacity-0 invisible transition-all duration-300 z-[1030] lg:hidden sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
 <style>
-    /* Custom scrollbar for sidebar - minimal CSS needed */
+    /* Custom scrollbar for sidebar */
     #sidebar::-webkit-scrollbar {
         width: 6px;
     }
     
     #sidebar::-webkit-scrollbar-track {
-        background: rgba(255,255,255,0.1);
+        background: #f1f1f1;
     }
     
     #sidebar::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.3);
+        background: #c1c1c1;
         border-radius: 3px;
     }
     
-    /* Active sidebar state */
+    #sidebar::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+    
+    /* Active states */
     #sidebar.active {
         left: 0 !important;
     }
@@ -245,34 +210,69 @@
         visibility: visible !important;
     }
     
-    /* Submenu animation */
-    .menu-item.open .submenu {
+    /* Topic animation */
+    .topic-section.open .topic-content {
+        max-height: 2000px;
+    }
+    
+    .topic-section.open .topic-arrow {
+        transform: rotate(180deg);
+    }
+    
+    /* Subtopic animation */
+    .subtopic-section.open .subtopic-content {
         max-height: 1000px;
     }
     
-    .menu-item.open .menu-arrow {
-        transform: rotate(90deg);
+    .subtopic-section.open .subtopic-arrow {
+        transform: rotate(180deg);
+    }
+    
+    /* Mobile responsive */
+    @media (max-width: 1024px) {
+        #sidebar {
+            left: -280px;
+        }
     }
 </style>
 
 <script>
-    function toggleSubmenu(element) {
-        const menuItem = element.parentElement;
-        const isOpen = menuItem.classList.contains('open');
+    function toggleTopic(element) {
+        const topicSection = element.parentElement;
+        const isOpen = topicSection.classList.contains('open');
         
-        // Close all other submenus
-        document.querySelectorAll('.menu-item.open').forEach(item => {
-            if (item !== menuItem) {
-                item.classList.remove('open');
+        // Close all other topics
+        document.querySelectorAll('.topic-section.open').forEach(section => {
+            if (section !== topicSection) {
+                section.classList.remove('open');
             }
         });
         
-        // Toggle current submenu
-        menuItem.classList.toggle('open');
+        // Toggle current topic
+        topicSection.classList.toggle('open');
+    }
+    
+    function toggleSubtopic(element) {
+        const subtopicSection = element.parentElement;
+        const isOpen = subtopicSection.classList.contains('open');
+        
+        // Toggle current subtopic
+        subtopicSection.classList.toggle('open');
     }
     
     function closeSidebar() {
         document.getElementById('sidebar').classList.remove('active');
-        document.getElementById('mainContent').classList.remove('sidebar-open');
     }
+    
+    // Open first topic by default
+    document.addEventListener('DOMContentLoaded', function() {
+        const firstTopic = document.querySelector('.topic-section');
+        const firstSubtopic = document.querySelector('.subtopic-section');
+        if (firstTopic) {
+            firstTopic.classList.add('open');
+        }
+        if (firstSubtopic) {
+            firstSubtopic.classList.add('open');
+        }
+    });
 </script>
