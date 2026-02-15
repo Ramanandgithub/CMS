@@ -37,6 +37,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/user-profile', [AdminController::class, 'userProfile'])->name('user-profile');
 
     Route::get('/add-topics', [AdminController::class, 'addTopics'])->name('add-topics');
+    Route::get('/add-sub-topic', [AdminController::class, 'addSubTopic'])->name('add-sub-topic');
+    Route::get('/add-page', [AdminController::class, 'addPage'])->name('add-page');
 });
 
 

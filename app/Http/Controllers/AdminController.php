@@ -30,4 +30,15 @@ class AdminController extends Controller
     {
         return view('backend.add-topics');
     }
+
+    public function addSubTopic()
+    {
+        return view('backend.add-sub-topic');
+    }
+
+    public function addPage()
+    {
+        return view('backend.add-page');
+    }
+
 }
