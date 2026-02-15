@@ -20,7 +20,7 @@
                         </div>
                         <input type="text" 
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" 
-                            placeholder="Search bills, transactions...">
+                            placeholder="Search subjects, courses...">
                     </div>
                 </div>
             </div>
@@ -28,12 +28,12 @@
             <!-- Right Section: Actions + Profile -->
             <div class="flex items-center space-x-3 md:space-x-4">
                 <!-- Quick Add Button -->
-                <button class="hidden sm:flex items-center px-4 py-2 bg-gradient-to-r from-blue-900 to-blue-700 text-white rounded-lg hover:from-blue-800 hover:to-blue-600 transition-all shadow-md hover:shadow-lg">
+                <!-- <button class="hidden sm:flex items-center px-4 py-2 bg-gradient-to-r from-blue-900 to-blue-700 text-white rounded-lg hover:from-blue-800 hover:to-blue-600 transition-all shadow-md hover:shadow-lg">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                     </svg>
                     <span class="font-medium">Pay Bill</span>
-                </button>
+                </button> -->
                 
                 <!-- Notifications -->
                 <div class="relative">
@@ -130,7 +130,7 @@
                         </div>
                         
                         <div class="py-2">
-                            <a href="" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                            <a href="{{ route('admin.user-profile') }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
                                 <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>

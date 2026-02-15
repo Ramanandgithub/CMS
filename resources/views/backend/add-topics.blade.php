@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Add Subject')
+@section('title', 'CMS Add Topics')
 
 
 
@@ -10,8 +10,8 @@
     <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 rounded-2xl p-6 md:p-8 text-white shadow-xl">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold mb-2">Add Subject</h1>
-                <p class="text-blue-200">Add a new subject to the system</p>
+                <h1 class="text-2xl md:text-3xl font-bold mb-2">Add Topics</h1>
+                <p class="text-blue-200">Add a new topic to the system</p>
             </div>
             <div class="mt-4 md:mt-0">
                 <button onclick="$('#rechargeForm').slideToggle()" class="px-6 py-3 bg-white text-blue-900 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-md">
@@ -19,7 +19,7 @@
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
-                        New Subject
+                        New Topics
                     </div>
                 </button>
             </div>
@@ -79,26 +79,32 @@
 
     <!-- Recharge Form -->
     <div id="rechargeForm" class="bg-white rounded-xl shadow-lg p-6" style="display: none;">
-        <h3 class="text-xl font-bold text-gray-900 mb-6">Quick Add Subject</h3>
+        <h3 class="text-xl font-bold text-gray-900 mb-6">Add Qucick Topics</h3>
         
         <form class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Mobile Number -->
+                <!-- subject Name -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Subject Name</label>
-                    <input type="text" id="subjectName" placeholder="Enter subject name" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Select Subjects</label>
+                    <select id="suject_id" onchange="loadSujects()" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                        <option value="">Choose Subject</option>
+                        <option value="php">PHP</option>
+                        <option value="laravel">Laravel</option>
+                        <option value="mysql">Mysql</option>
+                        <option value="db">DBMS</option>
+                    </select>
                 </div>
 
-                <!-- Operator -->
+                <!-- topic name -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Subject Slug</label>
-                    <input type="text" id="subjectSlug" placeholder="Enter subject slug" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Topic Name</label>
+                    <input type="text" id="topicName" placeholder="Enter topic name" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
                 </div>
 
-                <!-- Circle -->
+                <!-- topic slug -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Subject Description</label>
-                    <textarea id="subjectDescription" placeholder="Enter subject description" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"></textarea>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Topic Slug</label>
+                   <input type="text" id="topicSlug" placeholder="Enter topic slug" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
                 </div>
 
                 

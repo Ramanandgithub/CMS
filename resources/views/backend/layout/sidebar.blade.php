@@ -9,8 +9,8 @@
                 </svg>
             </div>
             <div>
-                <h2 class="text-xl font-bold">BBPS</h2>
-                <p class="text-xs text-blue-300">Bill Payment</p>
+                <h2 class="text-xl font-bold">CMS</h2>
+                <p class="text-xs text-blue-300">Management</p>
             </div>
         </div>
         <button id="sidebar-close" class="md:hidden text-white hover:text-blue-300">
@@ -35,7 +35,7 @@
             <p class="px-4 text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Bill Payments</p>
             
             <!-- Electricity -->
-            <a href="" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('admin.usersList') ? 'bg-blue-800 shadow-lg' : '' }}">
+            <a href="{{ route('admin.user-list') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('admin.user-list') ? 'bg-blue-800 shadow-lg' : '' }}">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
@@ -50,11 +50,11 @@
             
             
             <!-- Water -->
-            <a href="" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('bills.water') ? 'bg-blue-800 shadow-lg' : '' }}">
+            <a href="{{ route('admin.add-topics') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('admin.add-topics') ? 'bg-blue-800 shadow-lg' : '' }}">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                 </svg>
-                <span class="font-medium">Water</span>
+                <span class="font-medium">Add Topics</span>
             </a>
             
             <!-- Gas -->
@@ -125,7 +125,7 @@
             <p class="px-4 text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Settings</p>
             
             <!-- Profile -->
-            <a href="" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('profile') ? 'bg-blue-800 shadow-lg' : '' }}">
+            <a href="{{ route('admin.user-profile') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('admin.user-profile') ? 'bg-blue-800 shadow-lg' : '' }}">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
