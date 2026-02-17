@@ -17,7 +17,7 @@ class SubjectTableSeeder extends Seeder
         $subjects = [
             ['title' => 'Python', 'description' => 'High-level programming language used for web, data science, AI, and more.'],
             ['title' => 'Java', 'description' => 'Object-oriented programming language used for enterprise applications and Android development.'],
-            ['title' => 'C++', 'description' => 'General-purpose programming language with high performance, used for system/software development.'],
+            ['title' => 'CPP', 'description' => 'General-purpose programming language with high performance, used for system/software development.'],
             ['title' => 'JavaScript', 'description' => 'Scripting language for web development, both frontend and backend (Node.js).'],
             ['title' => 'PHP', 'description' => 'Server-side scripting language mainly used for web development.'],
             ['title' => 'C#', 'description' => 'Programming language developed by Microsoft for .NET framework applications.'],
