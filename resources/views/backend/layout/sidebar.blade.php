@@ -1,444 +1,114 @@
-<style>
-    .nav-item {
-        margin-top: 10px;
-    }
-</style>
-<nav id="sidebar" class="d-flex flex-column sidebar  p-3 text-white">
 
-    <!-- Close Button  -->
-    <div class="d-flex justify-content-end d-lg-none mb-3">
-        <button id="sidebarClose" class="btn btn-outline-light">
-            <i class="bi bi-x-lg"></i>
+<aside id="sidebar" class="sidebar-mobile md:relative fixed inset-y-0 left-0 z-40 w-64 bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900 text-white transition-transform duration-300 ease-in-out overflow-y-auto">
+    <!-- Logo Section -->
+    <div class="flex items-center justify-between px-6 py-5 border-b border-blue-700">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold">CMS</h2>
+                <p class="text-xs text-blue-300">Management</p>
+            </div>
+        </div>
+        <button id="sidebar-close" class="md:hidden text-white hover:text-blue-300">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
         </button>
     </div>
-    @php
-    $role = 1;
-    @endphp
-
-    {{-- @if ($role == 1)
-        <h5 class="text-center mb-4">ADMIN PANEL </h5>
-    @else
-        <h5 class="text-center mb-4">USER PANEL </h5>
-    @endif --}}
-    @if ($role == 1)
-    <h5 class="text-center mb-4">ADMIN PANEL</h5>
-    @elseif ($role == 4)
-    <h5 class="text-center mb-4">SUPPORT PANEL</h5>
-    @else
-    <h5 class="text-center mb-4">USER PANEL</h5>
-    @endif
-
-
-    @if ($role == 1)
-    <ul class="nav nav-pills flex-column mb-auto">
-
-        <!-- Dashboard -->
-
-        <li class="nav-item">
-            <a href="{{ route('admin.dashboard') }}"
-                class="nav-link text-white {{ Route::is('admin.dashboard') ? 'sidebar-active' : '' }}">
-                <i class="bi bi-speedometer2 me-2"></i> Dashboard
-            </a>
-        </li>
-
-
-        <!-- User Management -->
-        <li class="nav-item mt-2">
-            <ul class="nav nav-pills flex-column mb-auto">
-
-                @php
-                $userRoute = ['add-subject', 'view_user', 'request_services'];
-                $userActive = in_array(Route::currentRouteName(), $userRoute);
-                @endphp
-
-                <li class="nav-item">
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center {{ $userActive ? '' : 'collapsed' }} {{ $userActive ? 'sidebar-active' : '' }}"
-                        data-bs-toggle="collapse" href="#userManagement" role="button"
-                        aria-expanded="{{ $userActive ? 'true' : 'false' }}" aria-controls="userManagement">
-                        <span><i class="bi bi-people me-2"></i> Subject Management</span>
-                        <i class="bi bi-chevron-down small"></i>
-                    </a>
-
-                    <div class="collapse {{ $userActive ? 'show' : '' }} ms-3" id="userManagement">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.add-subject') }}"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'admin.add-subject' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-person-lines-fill me-2"></i>
-                                    Add Subject
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="#"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'request_services' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-clipboard-check me-2"></i>
-                                    Service Requests
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'support_details' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-person-plus-fill me-2"></i> Add New Support User
-                                </a>
-                            </li>
-
-
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Transactions -->
-        <li class="nav-item mt-2">
-            <ul class="nav nav-pills flex-column mb-auto">
-
-                @php
-                $transactionRoute = ['reports/recharge', 'reports/utility', 'reports/banking', 'reports'];
-                $servicesActive = in_array(Route::currentRouteName(), $transactionRoute);
-                @endphp
-
-                <li class="nav-item">
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center {{ $servicesActive ? '' : 'collapsed' }} {{ $servicesActive ? 'sidebar-active' : '' }}"
-                        data-bs-toggle="collapse" href="#transactionManagement" role="button"
-                        aria-expanded="{{ $servicesActive ? 'true' : 'false' }}">
-                        <span><i class="bi bi-cash-stack me-2"></i> Transactions</span>
-                        <i class="bi bi-chevron-down small"></i>
-                    </a>
-
-                    <div class="collapse {{ $servicesActive ? 'show' : '' }} ms-3" id="transactionManagement">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a href="{{ url('reports/recharge') }}"
-                                    class="nav-link text-white {{ request()->is('reports/recharge') ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-phone me-2"></i>
-                                    Recharge
-                                </a>
-                            </li>
-
-
-                            <li class="nav-item">
-                                <a href="{{ url('reports/banking') }}"
-                                    class="nav-link text-white {{ request()->is('reports/banking') ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-bank me-2"></i>
-                                    Banking
-                                </a>
-                            </li>
-
-
-                            <li class="nav-item">
-                                <a href="{{ url('reports/utility') }}"
-                                    class="nav-link text-white {{ request()->is('reports/utility') ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-lightning-charge me-2"></i>
-                                    Utility
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Reports -->
-        <li class="nav-item mt-2">
-            <ul class="nav nav-pills flex-column mb-auto">
-                @php
-                $reportRoute = ['complain.report', 'api_log'];
-                $reportActive = in_array(Route::currentRouteName(), $reportRoute);
-                @endphp
-
-                <li class="nav-item">
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center {{ $reportActive ? '' : 'collapsed' }} {{ $reportActive ? 'sidebar-active' : '' }}"
-                        data-bs-toggle="collapse" href="#reportRoute" role="button"
-                        aria-expanded="{{ $reportActive ? 'true' : 'false' }}">
-                        <span><i class="bi bi-file-earmark-text me-2"></i> Reports
-                        </span>
-                        <i class="bi bi-chevron-down small"></i>
-                    </a>
-
-                    <div class="collapse {{ $reportActive ? 'show' : '' }} ms-3" id="reportRoute">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a href="#"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'complain.report' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-file-earmark-text me-2"></i> Complaint
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'api_log' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-journal-text me-2"></i> API
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Matster Settings -->
-        <li class="nav-item mt-2">
-            <ul class="nav nav-pills flex-column mb-auto">
-                @php
-                $masterRoute = ['our_servicess', 'providers'];
-                $masterActive = in_array(Route::currentRouteName(), $masterRoute);
-                @endphp
-
-                <li class="nav-item">
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center {{ $masterActive ? '' : 'collapsed' }} {{ $masterActive ? 'sidebar-active' : '' }}"
-                        data-bs-toggle="collapse" href="#masterRoute" role="button"
-                        aria-expanded="{{ $masterActive ? 'true' : 'false' }}">
-                        <span><i class="bi bi-gear me-2"></i> Master Setting
-                        </span>
-                        <i class="bi bi-chevron-down small"></i>
-                    </a>
-
-                    <div class="collapse {{ $masterActive ? 'show' : '' }} ms-3" id="masterRoute">
-                        <ul class="nav flex-column">
-
-                            <li class="nav-item">
-                                <a href=""
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'our_servicess' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-briefcase me-2"></i>
-                                    Our Services
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="#"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'providers' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-person-badge me-2"></i> Providers
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href=""
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'categories.index' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-tags me-2"></i>
-                                    Categories
-                                </a>
-                            </li>
-
-
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
-
-
-        <li class="nav-item">
-            <a href=""
-                class="nav-link text-white {{ Route::currentRouteName() == 'schemes.index' ? 'sidebar-active' : '' }}">
-                <i class="bi bi-diagram-3 me-2"></i> Schemes
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#"
-                class="nav-link text-white {{ Route::is('user_assign_to_support') ? 'sidebar-active' : '' }}">
-                <i class="bi bi-person-check me-2"></i>
-                Assign User to Support
-            </a>
-        </li>
-
-
-        <!-- Ledger -->
-        <li class="nav-item">
-            <a href="#"
-                class="nav-link text-white {{ Route::currentRouteName() == 'ladger.index' ? 'sidebar-active' : '' }}">
-                <i class="bi bi-journal-text me-2"></i>
-                Ledger
-            </a>
-        </li>
-
-        <!-- Logout -->
-        <li class="nav-item">
-            <form action="#" method="POST">
-                @csrf
-                <button type="submit"
-                    class="nav-link btn btn-link text-white w-100 text-start d-flex align-items-center gap-2 px-3"
-                    style="background-color: #e76666;">
-                    <i class="bi bi-box-arrow-right fs-5"></i>
-                    <span>Logout</span>
-                </button>
-            </form>
-        </li>
-    </ul>
-    @elseif($role == 2)
-    <ul class="nav nav-pills flex-column mb-auto">
-
-        <!-- Dashboard -->
-        <li class="nav-item">
-            <a href="{{ route('dashboard') }}"
-                class="nav-link text-white {{ Route::is('dashboard') ? 'sidebar-active' : '' }}">
-                <i class="bi bi-speedometer2 me-2"></i> Dashboard
-            </a>
-        </li>
-
-        <!-- Services -->
-        <li class="nav-item mt-2">
-            <ul class="nav nav-pills flex-column mb-auto">
-
-                @php
-                $serviceRoute = ['utility_service', 'recharge_service', 'banking_service'];
-                $servicesActive = in_array(Route::currentRouteName(), $serviceRoute);
-                @endphp
-
-                <li class="nav-item">
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center {{ $servicesActive ? '' : 'collapsed' }} {{ $servicesActive ? 'sidebar-active' : '' }}"
-                        data-bs-toggle="collapse" href="#bankingServices" role="button"
-                        aria-expanded="{{ $servicesActive ? 'true' : 'false' }}">
-                        <span><i class="bi bi-gear-fill me-2"></i> Services</span>
-                        <i class="bi bi-chevron-down small"></i>
-                    </a>
-
-                    <div class="collapse {{ $servicesActive ? 'show' : '' }} ms-3" id="bankingServices">
-                        <ul class="nav flex-column">
-
-                            <li class="nav-item">
-                                <a href="{{ route('banking_service') }}"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'banking_service' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-bank me-2"></i>
-                                    Banking Services
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{{ route('utility_service') }}"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'utility_service' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-lightning-charge me-2"></i>
-                                    Utility Services
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{{ route('recharge_service') }}"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'recharge_service' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-phone me-2"></i>
-                                    Recharge Services
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Transaction -->
-        <li class="nav-item mt-2">
-            <ul class="nav nav-pills flex-column mb-auto">
-
-                @php
-                $transactionRoute = [
-                'transaction_status',
-                'transaction_complaint',
-                'complaint_status',
-                'reports/recharge',
-                'reports/banking',
-                'reports/utility',
-                'reports',
-                ];
-                $transactionActive = in_array(Route::currentRouteName(), $transactionRoute);
-                @endphp
-
-                <li class="nav-item">
-                    <a class="nav-link text-white d-flex justify-content-between align-items-center {{ $transactionActive ? '' : 'collapsed' }} {{ $transactionActive ? 'sidebar-active' : '' }}"
-                        data-bs-toggle="collapse" href="#transaction" role="button"
-                        aria-expanded="{{ $transactionActive ? 'true' : 'false' }}">
-                        <span><i class="bi bi-receipt me-2"></i> Transaction Report</span>
-                        <i class="bi bi-chevron-down small"></i>
-                    </a>
-
-                    <div class="collapse {{ $transactionActive ? 'show' : '' }} ms-3" id="transaction">
-                        <ul class="nav flex-column">
-
-                            <li class="nav-item">
-                                <a href="{{ url('reports/recharge') }}"
-                                    class="nav-link text-white {{ request()->is('reports/recharge') ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-phone me-2"></i>
-                                    Recharge
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{{ url('reports/banking') }}"
-                                    class="nav-link text-white {{ request()->is('reports/banking') ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-bank me-2"></i>
-                                    Banking
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{{ url('reports/utility') }}"
-                                    class="nav-link text-white {{ request()->is('reports/utility') ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-lightning-charge me-2"></i>
-                                    Utility
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{{ route('transaction_status') }}"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'transaction_status' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-list-check me-2"></i>
-                                    Transaction Status
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{{ route('transaction_complaint') }}"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'transaction_complaint' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-exclamation-octagon me-2"></i>
-                                    Transaction Complaint
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{{ route('complaint_status') }}"
-                                    class="nav-link text-white {{ Route::currentRouteName() == 'complaint_status' ? 'sidebar-active' : '' }}">
-                                    <i class="bi bi-info-circle me-2"></i>
-                                    Complaint Status
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
-
-        <!-- Ledger Report -->
-        {{-- <li class="nav-item">
-            <a href="javascript:void(0)" class="nav-link text-white">
-                <i class="bi bi-journal-text me-2"></i> Ledger Report
-            </a>
-        </li> --}}
-
-        <li class="nav-item">
-            <a href="{{ route('ladger.index') }}"
-                class="nav-link text-white {{ Route::currentRouteName() == 'ladger.index' ? 'sidebar-active' : '' }}">
-                <i class="bi bi-journal-text me-2"></i>
-                Ledger Report
-            </a>
-        </li>
-
-        <!-- Logout -->
-        <li class="nav-item">
-            <form action="{{ route('admin.logout') }}" method="POST">
-                @csrf
-                <button type="submit"
-                    class="nav-link btn btn-link text-white w-100 text-start d-flex align-items-center gap-2 px-3"
-                    style="background-color: #e76666;">
-                    <i class="bi bi-box-arrow-right fs-5"></i>
-                    <span>Logout</span>
-                </button>
-            </form>
-        </li>
-
-    </ul>
     
-    @endif
-
-
-
-</nav>
+    <!-- Navigation Menu -->
+    <nav class="px-4 py-6 space-y-2">
+        <!-- Dashboard -->
+        <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('dashboard') ? 'bg-blue-800 shadow-lg' : '' }}">
+            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            <span class="font-medium">Dashboard</span>
+        </a>
+        
+        <!-- Bill Payments Section -->
+        <div class="pt-4">
+            <p class="px-4 text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Add Content</p>
+            
+            <!-- Electricity -->
+            <a href="{{ route('admin.user-list') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('admin.user-list') ? 'bg-blue-800 shadow-lg' : '' }}">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                <span class="font-medium">Users</span>
+            </a>
+             <a href="{{ route('admin.add-subject') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('add-subject') ? 'bg-blue-800 shadow-lg' : '' }}">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                <span class="font-medium">Add Subject</span>
+            </a>
+            
+            
+            <!-- Water -->
+            <a href="{{ route('admin.add-topics') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('admin.add-topics') ? 'bg-blue-800 shadow-lg' : '' }}">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                </svg>
+                <span class="font-medium">Add Topics</span>
+            </a>
+            
+            <!-- Gas -->
+            <a href="{{ route('admin.add-sub-topic') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('admin.add-sub-topic') ? 'bg-blue-800 shadow-lg' : '' }}">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
+                </svg>
+                <span class="font-medium">Add SubTopic</span>
+            </a>
+            
+            <!-- Mobile Recharge -->
+            <a href="{{ route('admin.add-page') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('admin.add-page') ? 'bg-blue-800 shadow-lg' : '' }}">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                <span class="font-medium">Add Page</span>
+            </a>
+            
+            
+        </div>
+        
+       
+        
+        <!-- Settings Section -->
+        <div class="pt-4">
+            <p class="px-4 text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2">Settings</p>
+            
+            <!-- Profile -->
+            <a href="{{ route('admin.user-profile') }}" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('admin.user-profile') ? 'bg-blue-800 shadow-lg' : '' }}">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                <span class="font-medium">Profile</span>
+            </a>
+            
+            <!-- Settings -->
+            <a href="" class="flex items-center px-4 py-3 rounded-lg hover:bg-blue-800 transition-colors {{ request()->routeIs('settings') ? 'bg-blue-800 shadow-lg' : '' }}">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span class="font-medium">Settings</span>
+            </a>
+        </div>
+    </nav>
+    
+    <!-- Footer -->
+    <div class="absolute bottom-0 w-full p-4 border-t border-blue-700">
+        <div class="flex items-center justify-between px-2">
+            <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span class="text-sm text-blue-200">Online</span>
+            </div>
+            <span class="text-xs text-blue-300">v1.0.0</span>
+        </div>
+    </div>
+</aside>    

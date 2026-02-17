@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Add Subject')
+@section('title', 'Add PageConetent')
 
 
 
@@ -10,8 +10,8 @@
     <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 rounded-2xl p-6 md:p-8 text-white shadow-xl">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold mb-2">Add Subject</h1>
-                <p class="text-blue-200">Add a new subject to the system</p>
+                <h1 class="text-2xl md:text-3xl font-bold mb-2">Add PageConetent
+                <!-- <p class="text-blue-200">Add a new PageConetent<p> -->
             </div>
             <div class="mt-4 md:mt-0">
                 <button onclick="$('#rechargeForm').slideToggle()" class="px-6 py-3 bg-white text-blue-900 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-md">
@@ -19,7 +19,7 @@
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
-                        New Subject
+                        New PageConetent
                     </div>
                 </button>
             </div>
@@ -36,7 +36,7 @@
                     </svg>
                 </div>
             </div>
-            <h3 class="text-gray-500 text-sm font-medium mb-1">Total Subjects</h3>
+            <h3 class="text-gray-500 text-sm font-medium mb-1">Total PageConetent
             <p class="text-2xl font-bold text-gray-900">245</p>
         </div>
 
@@ -79,26 +79,69 @@
 
     <!-- Recharge Form -->
     <div id="rechargeForm" class="bg-white rounded-xl shadow-lg p-6" style="display: none;">
-        <h3 class="text-xl font-bold text-gray-900 mb-6">Quick Add Subject</h3>
+        <h3 class="text-xl font-bold text-gray-900 mb-6">Quick Add PageConetent
         
         <form class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Mobile Number -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Subject Name</label>
-                    <input type="text" id="subjectName" placeholder="Enter subject name" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2"> Select Subject Name</label>
+                   <select name="subjectName" id="subjectName" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    <option value="">Select Subject</option>
+                    <option value="math">Math</option>
+                    <option value="science">Science</option>
+                    <option value="history">History</option>
+                    <option value="geography">Geography</option>
+                    <option value="english">English</option>
+                   </select>
                 </div>
 
                 <!-- Operator -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Subject Slug</label>
-                    <input type="text" id="subjectSlug" placeholder="Enter subject slug" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Select Topic</label>
+                   <select name="topicName" id="topicName" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    <option value="">Select Topic</option>
+                    <option value="algebra">Algebra</option>
+                    <option value="geometry">Geometry</option>
+                    <option value="physics">Physics</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="world-history">World History</option>
+                    <option value="indian-history">Indian History</option>
+                    <option value="physical-geography">Physical Geography</option>
+                    <option value="human-geography">Human Geography</option>
+
+                     </select>
                 </div>
 
                 <!-- Circle -->
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Subject Description</label>
-                    <textarea id="subjectDescription" placeholder="Enter subject description" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"></textarea>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">PageConetent
+                    <select name="PageConetentConetent-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    <option value="">Select PageConetent
+                    <option value="algebra">Algebra</option>
+                    <option value="geometry">Geometry</option>
+                    <option value="physics">Physics</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="world-history">World History</option>
+                    <option value="indian-history">Indian History</option>
+                    <option value="physical-geography">Physical Geography</option>
+                    <option value="human-geography">Human Geography</option>
+
+                     </select>
+                    
+                </div>
+
+                 <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Page Title</label>
+                   <input type="text" name="pageTitle" id="pageTitle" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                </div>
+                 <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Page Slug</label>
+                   <input type="text" name="pageSlug" id="pageSlug" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Index</label>
+                   <input type="text" name="pageIndex" id="pageIndex" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
                 </div>
 
                 

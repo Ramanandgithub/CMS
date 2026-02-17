@@ -48,26 +48,7 @@
 <div class="bg-green-600 fixed top-[72px] left-0 right-0 z-50">
     <div class="container mx-auto px-6">
         <div class="flex items-center gap-6 overflow-x-auto py-3">
-            <a href="{{route('home')}}" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Python</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Java</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">JavaScript</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">SQL</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">C</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">C++</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">HTML</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">CSS</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">React</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Node.js</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Spring Boot</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">C#</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">PHP</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">MySQL</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">MongoDB</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">AI</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">ML</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">DSA</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">DBMS</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">OS</a>
+            @yield('categories')
         </div>
     </div>
 </div>
