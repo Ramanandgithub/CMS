@@ -100,6 +100,10 @@
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Subject Description</label>
                     <textarea id="subjectDescription" placeholder="Enter subject description" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"></textarea>
                 </div>
+                 <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Order Index</label>
+                    <input type="number" id="orderIndex" placeholder="Enter order index" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                </div>
 
                 
 
