@@ -54,6 +54,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 Route::post('fetch/{type}/{id?}/{returntype?}', [CommonController::class, 'fetchData'])
     ->name('fetch.data');
+  
+
+    
 
 
     

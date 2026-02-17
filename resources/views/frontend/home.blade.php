@@ -9,6 +9,12 @@
 
 @section('content')
 
+@section('categories')
+    @foreach($subjects as $subject)
+        <a href="{{$subject->slug}}" class="text-white font-medium hover:text-gray-300 whitespace-nowrap">{{ $subject->title }}</a>
+    @endforeach
+@endsection
+
 
 <!-- Hero Section -->
 <!-- Tutorial Content Section -->

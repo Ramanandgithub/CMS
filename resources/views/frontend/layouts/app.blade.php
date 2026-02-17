@@ -94,12 +94,13 @@
         <!-- Main Content (Right) -->
         <div class="flex-1 transition-all duration-300 ease-in-out ml-0 lg:ml-[280px] relative z-10" id="mainContent">
             <!-- Page Content -->
+
             <div class="p-5 max-w-screen-2xl mx-auto animate-fade-in mt-20">
                 @yield('content')
             </div>
-            
-            <!-- Footer -->
-            @include('frontend.footer.index')
+
+             @include('frontend.footer.index')
+
         </div>
     </div>
     
