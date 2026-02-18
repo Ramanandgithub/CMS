@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommonController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,14 +12,20 @@ use App\Http\Controllers\AdminController;
 |--------------------------------------------------------------------------
 */
 
-// Route::view('/', 'frontend.index')->name('frontend.index');
-Route::get('/',function(){
-     return view('frontend.default');
-});
+Route::get('/', [HomeController::class, 'default'])->name('frontend.default');
+// Route::get('/',function(){
+//      return view('frontend.default');
+// });
 
-Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/{slug}', [HomeController::class, 'home'])->name('subject.show');
+Route::get('{subject}/{slug}/{id}', [HomeController::class, 'subtopicShow'])
+    ->name('subtopic.show');
 
-Route::view('/login', 'backend.loginpage.index')->name('login');
+
+
+Route::get('/login', function(){
+    return view( 'backend.loginpage.index');
+})->name('login');
 
 
 /*
@@ -27,7 +34,9 @@ Route::view('/login', 'backend.loginpage.index')->name('login');
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login');
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Login</title>
 
   <!-- Fonts -->
@@ -321,7 +322,7 @@ body {
           <p>Please enter your details</p>
         </div>
 
-        <form>
+        <form id="loginForm">
           <div class="field">
             <label>Email</label>
             <input id="email" type="email" placeholder="Enter your email" required>
@@ -344,7 +345,7 @@ body {
             <a href="#">Forgot password?</a>
           </div>
 
-          <button class="btn primary">Log In</button>
+          <button type="submit" class="btn primary">Log In</button>
         </form>
 
         <p class="signup">Don’t have an account? <a href="#">Sign Up</a></p>
@@ -355,6 +356,11 @@ body {
   </section>
 </main>
 
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script>
     /*  OJOS */
@@ -462,6 +468,56 @@ toggleBtn.addEventListener("click", () => {
   }
 });
 
+</script>
+
+<script>
+$(document).ready(function () {
+
+    $('#loginForm').on('submit', function (e) {
+        e.preventDefault();
+        // alert("Login button clicked!");
+        $.ajax({
+            url: "{{ route('admin.login') }}", 
+            type: "POST",
+            data: {
+                email: $('#email').val(),
+                password: $('#password').val(),
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Successful',
+                    text: response.message,
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+
+               
+                setTimeout(function () {
+                    window.location.href = "/admin/dashboard";
+                }, 1500);
+            },
+            error: function (xhr) {
+
+                let errorMessage = "Something went wrong";
+
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMessage = xhr.responseJSON.message;
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: errorMessage
+                });
+            }
+        });
+
+    });
+
+});
 </script>
 </body>
 </html>

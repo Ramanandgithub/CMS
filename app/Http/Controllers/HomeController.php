@@ -1,23 +1,35 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Subject;
+use App\Models\SubTopic;
 
 class HomeController extends Controller
-{  
-    public function home()
+{
+    public function default()
     {
         $subjects = Subject::all();
-        // dd($subjects);
-        return view('frontend.home',[
-            'subjects' => $subjects
+        return view('frontend.default', [
+            'subjects' => $subjects,
         ]);
     }
 
-    // public function showSubjects(){
-    //     $subjects = Subject::with('topics')->get();
-    //     return view('frontend.topbar.index', compact('subjects'));
-    // }
+    public function home()
+    {
+        $subjects = Subject::all();
+        return view('frontend.home', [
+            'subjects' => $subjects,
+        ]);
+    }
+
+    public function subtopicShow($slug, $id)
+    {
+        $subtopics = SubTopic::where('topic_id', $id)
+            ->get();
+
+        return view('frontend.sidebar.sidebar', [
+            'subtopics' =>  $subtopics,
+        ]);
+    }
+
 }

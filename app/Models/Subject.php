@@ -7,6 +7,7 @@ use App\Models\Topic;
 
 class Subject extends Model
 {
+    protected $table = 'subjects';
     protected $fillable = ['title', 'description'];
 
     public function topics()

@@ -3,12 +3,12 @@
     <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
             <!-- Logo -->
-            <div class="flex items-center gap-2">
+            <a class="flex items-center gap-2" href="{{route('frontend.default')}}">
                 <div class="w-10 h-10 bg-gray-900 flex items-center justify-center text-white font-bold text-xl">
                     R
                 </div>
                 <span class="text-2xl font-bold text-gray-900">point Tech</span>
-            </div>
+            </a>
             
             <!-- Menu Items -->
             <div class="hidden lg:flex items-center gap-8">

@@ -8,7 +8,7 @@
     <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 rounded-2xl p-6 md:p-8 text-white shadow-xl">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between">
             <div class="mb-4 md:mb-0">
-                <h1 class="text-2xl md:text-3xl font-bold mb-2">Welcome back, {{ Auth::user()->name ?? 'Ramanand ' }}! 👋</h1>
+                <h1 class="text-2xl md:text-3xl font-bold mb-2">Welcome back, {{ Auth::user()->name  }}! 👋</h1>
                 <p class="text-blue-200">Here's what's happening with your bills today</p>
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
