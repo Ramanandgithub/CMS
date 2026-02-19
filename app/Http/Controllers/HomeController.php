@@ -3,12 +3,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use App\Models\SubTopic;
+use Illuminate\Support\Facades\Cache;
+
 
 class HomeController extends Controller
 {
     public function default()
     {
-        $subjects = Subject::all();
+        $subjects = Cache::remember('subjects', 3600, function () {
+            return Subject::select('id','title','slug')->get();
+        });
         return view('frontend.default', [
             'subjects' => $subjects,
         ]);
@@ -16,7 +20,9 @@ class HomeController extends Controller
 
     public function home()
     {
-        $subjects = Subject::all();
+        $subjects = Cache::remember('subjects', 3600, function () {
+            return Subject::select('id','title','slug')->get();
+        });
         return view('frontend.home', [
             'subjects' => $subjects,
         ]);
