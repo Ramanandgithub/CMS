@@ -12,14 +12,20 @@ use App\Http\Controllers\Backend\AuthController;
 |--------------------------------------------------------------------------
 */
 
-// Route::view('/', 'frontend.index')->name('frontend.index');
-Route::get('/',function(){
-     return view('frontend.default');
-});
-
+Route::get('/', [HomeController::class, 'default'])->name('frontend.default');
+// Route::get('/',function(){
+//      return view('frontend.default');
+// });
 Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/{slug}', [HomeController::class, 'home'])->name('subject.show');
+Route::get('{subject}/{slug}/{id}', [HomeController::class, 'subtopicShow'])
+    ->name('subtopic.show');
 
-Route::view('/login', 'backend.loginpage.index')->name('login');
+
+
+Route::get('/admin/login', function(){
+    return view( 'backend.loginpage.index');
+})->name('login');
 
 
 /*
@@ -54,6 +60,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 Route::post('fetch/{type}/{id?}/{returntype?}', [CommonController::class, 'fetchData'])
     ->name('fetch.data');
+  
+
+    
 
 
     

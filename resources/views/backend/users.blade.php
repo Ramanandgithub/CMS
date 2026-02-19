@@ -176,12 +176,9 @@
                         <th class="px-6 py-4">User ID</th>
                         <th class="px-6 py-4">Name</th>
                         <th class="px-6 py-4">Email</th>
-                        <th class="px-6 py-4">Phone</th>
-                        <th class="px-6 py-4">City</th>
-                        <th class="px-6 py-4">Registration Date</th>
+                       
                         <th class="px-6 py-4">User Type</th>
-                        <th class="px-6 py-4">KYC Status</th>
-                        <th class="px-6 py-4">Status</th>
+                        <th class="px-6 py-4">Created At</th>
                         <th class="px-6 py-4">Action</th>
                     </tr>
                 </thead>
@@ -412,26 +409,38 @@
 
 <script>
 // Sample user data
-const usersData = [
-    { id: 'USR001', name: 'Rajesh Kumar', email: 'rajesh.kumar@example.com', phone: '9876543210', city: 'Mumbai', regDate: '2023-01-15', userType: 'premium', kycStatus: 'verified', status: 'active' },
-    { id: 'USR002', name: 'Priya Sharma', email: 'priya.sharma@example.com', phone: '9123456780', city: 'Delhi', regDate: '2023-02-20', userType: 'free', kycStatus: 'verified', status: 'active' },
-    { id: 'USR003', name: 'Amit Patel', email: 'amit.patel@example.com', phone: '9988776655', city: 'Bangalore', regDate: '2023-03-10', userType: 'premium', kycStatus: 'pending', status: 'active' },
-    { id: 'USR004', name: 'Sneha Reddy', email: 'sneha.reddy@example.com', phone: '9876501234', city: 'Hyderabad', regDate: '2023-04-05', userType: 'enterprise', kycStatus: 'verified', status: 'active' },
-    { id: 'USR005', name: 'Vikram Singh', email: 'vikram.singh@example.com', phone: '9876543211', city: 'Pune', regDate: '2023-05-12', userType: 'free', kycStatus: 'rejected', status: 'inactive' },
-    { id: 'USR006', name: 'Anjali Gupta', email: 'anjali.gupta@example.com', phone: '9123456781', city: 'Mumbai', regDate: '2023-06-18', userType: 'premium', kycStatus: 'verified', status: 'active' },
-    { id: 'USR007', name: 'Rahul Verma', email: 'rahul.verma@example.com', phone: '9988776656', city: 'Delhi', regDate: '2023-07-22', userType: 'free', kycStatus: 'pending', status: 'active' },
-    { id: 'USR008', name: 'Deepika Iyer', email: 'deepika.iyer@example.com', phone: '9876501235', city: 'Bangalore', regDate: '2023-08-30', userType: 'premium', kycStatus: 'verified', status: 'active' },
-    { id: 'USR009', name: 'Suresh Nair', email: 'suresh.nair@example.com', phone: '9876543212', city: 'Mumbai', regDate: '2023-09-14', userType: 'enterprise', kycStatus: 'verified', status: 'suspended' },
-    { id: 'USR010', name: 'Kavita Joshi', email: 'kavita.joshi@example.com', phone: '9123456782', city: 'Pune', regDate: '2023-10-08', userType: 'free', kycStatus: 'verified', status: 'active' },
-    { id: 'USR011', name: 'Manish Desai', email: 'manish.desai@example.com', phone: '9988776657', city: 'Hyderabad', regDate: '2023-11-25', userType: 'premium', kycStatus: 'pending', status: 'active' },
-    { id: 'USR012', name: 'Pooja Menon', email: 'pooja.menon@example.com', phone: '9876501236', city: 'Bangalore', regDate: '2023-12-03', userType: 'free', kycStatus: 'verified', status: 'active' },
-];
+// const usersData = [
+//     { id: 'USR001', name: 'Rajesh Kumar', email: 'rajesh.kumar@example.com', phone: '9876543210', city: 'Mumbai', regDate: '2023-01-15', userType: 'premium', kycStatus: 'verified', status: 'active' },
+//     { id: 'USR002', name: 'Priya Sharma', email: 'priya.sharma@example.com', phone: '9123456780', city: 'Delhi', regDate: '2023-02-20', userType: 'free', kycStatus: 'verified', status: 'active' },
+//     { id: 'USR003', name: 'Amit Patel', email: 'amit.patel@example.com', phone: '9988776655', city: 'Bangalore', regDate: '2023-03-10', userType: 'premium', kycStatus: 'pending', status: 'active' },
+//     { id: 'USR004', name: 'Sneha Reddy', email: 'sneha.reddy@example.com', phone: '9876501234', city: 'Hyderabad', regDate: '2023-04-05', userType: 'enterprise', kycStatus: 'verified', status: 'active' },
+//     { id: 'USR005', name: 'Vikram Singh', email: 'vikram.singh@example.com', phone: '9876543211', city: 'Pune', regDate: '2023-05-12', userType: 'free', kycStatus: 'rejected', status: 'inactive' },
+//     { id: 'USR006', name: 'Anjali Gupta', email: 'anjali.gupta@example.com', phone: '9123456781', city: 'Mumbai', regDate: '2023-06-18', userType: 'premium', kycStatus: 'verified', status: 'active' },
+//     { id: 'USR007', name: 'Rahul Verma', email: 'rahul.verma@example.com', phone: '9988776656', city: 'Delhi', regDate: '2023-07-22', userType: 'free', kycStatus: 'pending', status: 'active' },
+//     { id: 'USR008', name: 'Deepika Iyer', email: 'deepika.iyer@example.com', phone: '9876501235', city: 'Bangalore', regDate: '2023-08-30', userType: 'premium', kycStatus: 'verified', status: 'active' },
+//     { id: 'USR009', name: 'Suresh Nair', email: 'suresh.nair@example.com', phone: '9876543212', city: 'Mumbai', regDate: '2023-09-14', userType: 'enterprise', kycStatus: 'verified', status: 'suspended' },
+//     { id: 'USR010', name: 'Kavita Joshi', email: 'kavita.joshi@example.com', phone: '9123456782', city: 'Pune', regDate: '2023-10-08', userType: 'free', kycStatus: 'verified', status: 'active' },
+//     { id: 'USR011', name: 'Manish Desai', email: 'manish.desai@example.com', phone: '9988776657', city: 'Hyderabad', regDate: '2023-11-25', userType: 'premium', kycStatus: 'pending', status: 'active' },
+//     { id: 'USR012', name: 'Pooja Menon', email: 'pooja.menon@example.com', phone: '9876501236', city: 'Bangalore', regDate: '2023-12-03', userType: 'free', kycStatus: 'verified', status: 'active' },
+// ];
 
 let usersTable;
 
 $(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     usersTable = $('#usersTable').DataTable({
-        data: usersData,
+        processing: true,
+        serverSide: false, // Agar pure server-side pagination chahiye to true karo
+        ajax: {
+            url: '/fetch/users/0',   // Laravel route
+            type: 'POST',
+            dataSrc: 'data' // Agar response direct array hai
+            // Agar response { data: [...] } format me hai to dataSrc: 'data'
+        },
         responsive: true,
         dom: 'Bfrtip',
         buttons: [
@@ -440,22 +449,18 @@ $(document).ready(function() {
                 text: '<i class="fas fa-file-excel"></i> Export Excel',
                 className: 'dt-button',
                 title: 'BBPS Users List',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
-                }
+                exportOptions: { columns: [0,1,2,3,4,5,6,7,8] }
             },
             {
                 extend: 'pdf',
                 text: '<i class="fas fa-file-pdf"></i> Export PDF',
                 className: 'dt-button',
                 title: 'BBPS Users List',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
-                },
+                exportOptions: { columns: [0,1,2,3,4,5,6,7,8] },
                 customize: function(doc) {
                     doc.styles.title = {
                         color: '#1e3a8a',
-                        fontSize: '20',
+                        fontSize: 20,
                         alignment: 'center',
                         bold: true
                     };
@@ -466,11 +471,10 @@ $(document).ready(function() {
                 text: '<i class="fas fa-print"></i> Print',
                 className: 'dt-button',
                 title: 'BBPS Users List',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
-                }
+                exportOptions: { columns: [0,1,2,3,4,5,6,7,8] }
             }
         ],
+
         columns: [
             { data: 'id' },
             { 
@@ -480,58 +484,60 @@ $(document).ready(function() {
                 }
             },
             { data: 'email' },
+            // { 
+            //     data: 'phone',
+            //     render: function(data) {
+            //         return '<span class="font-mono">' + data + '</span>';
+            //     }
+            // },
+            // { data: 'city' },
+            // { data: 'regDate' },
             { 
-                data: 'phone',
-                render: function(data) {
-                    return '<span class="font-mono">' + data + '</span>';
-                }
-            },
-            { data: 'city' },
-            { data: 'regDate' },
-            { 
-                data: 'userType',
+                data: 'role',
                 render: function(data) {
                     const colors = {
-                        'free': 'gray',
-                        'premium': 'purple',
-                        'enterprise': 'blue'
+                        free: 'gray',
+                        premium: 'purple',
+                        enterprise: 'blue'
                     };
                     const color = colors[data] || 'gray';
                     return `<span class="px-3 py-1 text-xs font-semibold text-${color}-700 bg-${color}-100 rounded-full capitalize">${data}</span>`;
                 }
             },
-            { 
-                data: 'kycStatus',
+            // { 
+            //     data: 'kycStatus',
+            //     render: function(data) {
+            //         const badges = {
+            //             verified: '<span class="px-3 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">Verified</span>',
+            //             pending: '<span class="px-3 py-1 text-xs font-semibold text-yellow-700 bg-yellow-100 rounded-full">Pending</span>',
+            //             rejected: '<span class="px-3 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">Rejected</span>'
+            //         };
+            //         return badges[data] || data;
+            //     }
+            // },
+            {
+                data: 'created_at',
                 render: function(data) {
-                    const badges = {
-                        'verified': '<span class="px-3 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">Verified</span>',
-                        'pending': '<span class="px-3 py-1 text-xs font-semibold text-yellow-700 bg-yellow-100 rounded-full">Pending</span>',
-                        'rejected': '<span class="px-3 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">Rejected</span>'
-                    };
-                    return badges[data] || data;
+                    const date = new Date(data);
+                    return date.toLocaleDateString('en-GB', {
+                        day: '2-digit',
+                        month: 'short',
+                        year: 'numeric'
+                    });
                 }
             },
-            { 
-                data: 'status',
-                render: function(data) {
-                    const badges = {
-                        'active': '<span class="px-3 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">Active</span>',
-                        'inactive': '<span class="px-3 py-1 text-xs font-semibold text-gray-700 bg-gray-100 rounded-full">Inactive</span>',
-                        'suspended': '<span class="px-3 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">Suspended</span>'
-                    };
-                    return badges[data] || data;
-                }
-            },
+            
             {
                 data: null,
                 orderable: false,
                 render: function(data, type, row) {
                     return `
                         <div class="flex gap-2">
-                            <button onclick='viewUser(${JSON.stringify(row)})' class="px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded hover:bg-blue-700 transition-colors">
+                            <button onclick='viewUser(${JSON.stringify(row)})' 
+                                class="px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded hover:bg-blue-700">
                                 View
                             </button>
-                            <button class="px-3 py-1 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-700 transition-colors">
+                            <button class="px-3 py-1 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-700">
                                 Edit
                             </button>
                         </div>
@@ -539,6 +545,7 @@ $(document).ready(function() {
                 }
             }
         ],
+
         pageLength: 10,
         order: [[5, 'desc']],
         language: {
@@ -548,6 +555,7 @@ $(document).ready(function() {
         }
     });
 });
+
 
 // Onboarding Modal Functions
 function closeOnboardingModal() {

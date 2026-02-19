@@ -3,12 +3,12 @@
     <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
             <!-- Logo -->
-            <div class="flex items-center gap-2">
+            <a class="flex items-center gap-2" href="{{route('frontend.default')}}">
                 <div class="w-10 h-10 bg-gray-900 flex items-center justify-center text-white font-bold text-xl">
                     R
                 </div>
                 <span class="text-2xl font-bold text-gray-900">point Tech</span>
-            </div>
+            </a>
             
             <!-- Menu Items -->
             <div class="hidden lg:flex items-center gap-8">
@@ -48,26 +48,15 @@
 <div class="bg-green-600 fixed top-[72px] left-0 right-0 z-50">
     <div class="container mx-auto px-6">
         <div class="flex items-center gap-6 overflow-x-auto py-3">
-            <a href="{{route('home')}}" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Python</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Java</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">JavaScript</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">SQL</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">C</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">C++</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">HTML</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">CSS</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">React</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Node.js</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">Spring Boot</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">C#</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">PHP</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">MySQL</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">MongoDB</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">AI</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">ML</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">DSA</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">DBMS</a>
-            <a href="#" class="text-white hover:text-teal-200 whitespace-nowrap font-medium text-sm">OS</a>
+            @if(isset($subjects) && count($subjects) > 0)
+                @foreach($subjects as $subject)
+                    <a href="{{$subject->slug }}" class="text-white font-medium hover:text-gray-200 whitespace-nowrap transition-colors text-sm">
+                        {{ $subject->title }}
+                    </a>
+                @endforeach
+            @else
+                <span class="text-white text-sm">Loading categories...</span>
+            @endif
         </div>
     </div>
 </div>
