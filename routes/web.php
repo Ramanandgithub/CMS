@@ -23,7 +23,7 @@ Route::get('{subject}/{slug}/{id}', [HomeController::class, 'subtopicShow'])
 
 
 
-Route::get('/login', function(){
+Route::get('/admin/login', function(){
     return view( 'backend.loginpage.index');
 })->name('login');
 
