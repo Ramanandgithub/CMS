@@ -48,7 +48,15 @@
 <div class="bg-green-600 fixed top-[72px] left-0 right-0 z-50">
     <div class="container mx-auto px-6">
         <div class="flex items-center gap-6 overflow-x-auto py-3">
-            @yield('categories')
+            @if(isset($subjects) && count($subjects) > 0)
+                @foreach($subjects as $subject)
+                    <a href="{{ route('home') }}#{{ $subject->slug }}" class="text-white font-medium hover:text-gray-200 whitespace-nowrap transition-colors text-sm">
+                        {{ $subject->title }}
+                    </a>
+                @endforeach
+            @else
+                <span class="text-white text-sm">Loading categories...</span>
+            @endif
         </div>
     </div>
 </div>

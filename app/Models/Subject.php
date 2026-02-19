@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 use App\Models\Topic;
 
 class Subject extends Model
@@ -15,3 +16,4 @@ class Subject extends Model
         return $this->hasMany(Topic::class, 'subject_id', 'id');
     }
 }
+

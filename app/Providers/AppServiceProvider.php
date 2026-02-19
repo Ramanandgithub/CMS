@@ -3,6 +3,7 @@ namespace App\Providers;
 
 use App\Models\Subject;
 use App\Models\SubTopic;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -38,9 +39,12 @@ class AppServiceProvider extends ServiceProvider
                 // }
             }
             // dd($subject);
-            
-            $view->with('subject', $subject);
-        });
-    }
 
+            $view->with('subject', $subject);
+            View::composer(['frontend.layouts.app', 'frontend.topbar.index'], function ($view) {
+                $view->with('subjects', Subject::all());
+            });
+        });
+
+    }
 }

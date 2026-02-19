@@ -27,9 +27,9 @@ class CommonController extends Controller
 
             case 'users':
                 $request['table'] = '\App\Models\User';
-                $request['searchData'] = ['id', 'name', 'email', 'mobile', 'created_at'];   // it is for the Datatable search box
+                $request['searchData'] = ['id', 'name', 'email', 'created_at'];   // it is for the Datatable search box
                 $request['select'] = 'all';
-                $request['with'] = ['business'];
+                // $request['with'] = ['business'];
 
                 $orderIndex = $request->get('order');
 
@@ -52,19 +52,19 @@ class CommonController extends Controller
 
                 $request['whereIn'] = 'id';
                 $request['parentData'] = [$request->id];
-
-                if (Auth::user()->role_id == '1') {
+                // dd(Auth::user()->role);
+                if (Auth::user()->role == 'admin') {
                     $request['parentData'] = 'all';
                 } else {
-                    $request['whereIn'] = 'user_id';
+                    $request['whereIn'] = 'id';
                     $request['parentData'] = [Auth::user()->id];
                 }
 
                 break;
 
-            case 'global-service':
-                $request['table'] = '\App\Models\GlobalService';
-                $request['searchData'] = ['id', 'service_name', 'created_at'];
+            case 'subjects':
+                $request['table'] = '\App\Models\Subject';
+                $request['searchData'] = ['id', 'title', 'created_at'];
                 $request['select'] = 'all';
                 // $request['with'] = ['business'];
 
@@ -90,10 +90,10 @@ class CommonController extends Controller
                 $request['whereIn'] = 'id';
                 $request['parentData'] = [$request->id];
 
-                if (Auth::user()->role_id == '1') {
+                if (Auth::user()->role == 'admin') {
                     $request['parentData'] = 'all';
                 } else {
-                    $request['whereIn'] = 'user_id';
+                    $request['whereIn'] = 'id';
                     $request['parentData'] = [Auth::user()->id];
                 }
 
@@ -136,13 +136,13 @@ class CommonController extends Controller
                 }
                 break;
 
-            case 'transactions':
-                $request['table'] = '\App\Models\Transaction';
+            case 'topics':
+                $request['table'] = '\App\Models\Topic';
 
-                $request['searchData'] = ['id',  'created_at', 'reference_number', 'user_id', 'operator_id', 'circle_id', 'status', 'amount', 'transaction_type'];
+                $request['searchData'] = ['id',  'created_at', 'title', 'slug', 'description'];
 
                 $request['select'] = 'all';
-                $request['with'] = ['user', 'operator', 'circle'];
+                $request['with'] = ['subject'];
                 $orderIndex = $request->get('order');
                 if (isset($orderIndex) && count($orderIndex)) {
                     $columnsIndex = $request->get('columns');
@@ -162,10 +162,10 @@ class CommonController extends Controller
                 }
                 $request['whereIn'] = 'id';
                 $request['parentData'] = [$request->id];
-                if (Auth::user()->role_id == '1') {
+                if (Auth::user()->role == 'admin') {
                     $request['parentData'] = 'all';
                 } else {
-                    $request['whereIn'] = 'user_id';
+                    $request['whereIn'] = 'id';
                     $request['parentData'] = [Auth::user()->id];
                 }
                 break;
@@ -202,11 +202,11 @@ class CommonController extends Controller
                 }
                 break;
 
-            case 'enabled-services':
-                $request['table'] = '\App\Models\UserService';
-                $request['searchData'] = ['user_id', 'transaction_amount', 'is_active', 'is_api_enable', 'service_id', 'user_id'];
+            case 'sub-topics':
+                $request['table'] = '\App\Models\SubTopic';
+                $request['searchData'] = ['id', 'title', 'slug', 'order_index', 'is_active', 'created_at'];
                 $request['select'] = 'all';
-                $request['with'] = ['user', 'user.business', 'service'];
+                $request['with'] = ['topic'];
 
                 $orderIndex = $request->get('order');
                 if (isset($orderIndex) && count($orderIndex)) {
@@ -230,10 +230,9 @@ class CommonController extends Controller
                 if (Auth::user()->role_id == '1') {
                     $request['parentData'] = 'all';
 
-                    $request['whereIn'] = 'status';
-                    $request['parentData'] = 'approved';
+                   
                 } else {
-                    $request['whereIn'] = 'user_id';
+                    $request['whereIn'] = 'id';
                     $request['parentData'] = [Auth::user()->id];
                 }
                 break;

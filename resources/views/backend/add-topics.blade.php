@@ -189,12 +189,15 @@
             <table id="rechargeTable" class="display responsive nowrap" style="width:100%">
                 <thead class="bg-gradient-to-r from-blue-900 to-blue-800 text-white">
                     <tr>
-                        <th class="px-6 py-4">Recharge ID</th>
-                        <th class="px-6 py-4">Date & Time</th>
+                        <th class="px-6 py-4"> ID</th>
+                       
                         <th class="px-6 py-4">Subject</th>
-                        <th class="px-6 py-4">Sulug</th>
-                        <th class="px-6 py-4">Discription</th>
-                        <th class="px-6 py-4">Amount</th>
+                        <th class="px-6 py-4">Topic</th>
+
+                        
+                        <th class="px-6 py-4">Slug</th>
+                        <th class="px-6 py-4">Description</th>
+                       
                         <th class="px-6 py-4">Status</th>
                         <th class="px-6 py-4">Action</th>
                     </tr>
@@ -238,52 +241,64 @@
 
 <script>
 // Sample recharge data
-const rechargeData = [
-    { id: 'RCH001234567', date: '2026-01-13 10:30 AM', mobile: '9876543210', operator: 'Airtel', plan: 'Unlimited - 84 Days', amount: 599, status: 'success' },
-    { id: 'RCH001234568', date: '2026-01-10 03:45 PM', mobile: '9123456780', operator: 'Jio', plan: 'Data Pack - 28 Days', amount: 299, status: 'success' },
-    { id: 'RCH001234569', date: '2026-01-08 11:20 AM', mobile: '9988776655', operator: 'Vi', plan: 'Smart Pack - 56 Days', amount: 449, status: 'failed' },
-    { id: 'RCH001234570', date: '2026-01-05 05:15 PM', mobile: '9876501234', operator: 'BSNL', plan: 'Voice + Data - 90 Days', amount: 399, status: 'success' },
-    { id: 'RCH001234571', date: '2026-01-03 02:30 PM', mobile: '9876543210', operator: 'Airtel', plan: 'Data Booster - 7 Days', amount: 48, status: 'success' },
-    { id: 'RCH001234572', date: '2026-01-01 09:00 AM', mobile: '9123456780', operator: 'Jio', plan: 'Unlimited - 28 Days', amount: 239, status: 'pending' },
-    { id: 'RCH001234573', date: '2025-12-28 04:20 PM', mobile: '9988776655', operator: 'Vi', plan: 'Mega Pack - 365 Days', amount: 2999, status: 'success' },
-    { id: 'RCH001234574', date: '2025-12-25 01:10 PM', mobile: '9876501234', operator: 'BSNL', plan: 'Talk Time', amount: 100, status: 'success' },
-    { id: 'RCH001234575', date: '2025-12-22 11:45 AM', mobile: '9876543210', operator: 'Airtel', plan: 'Netflix Bundle - 84 Days', amount: 1099, status: 'success' },
-    { id: 'RCH001234576', date: '2025-12-20 03:30 PM', mobile: '9123456780', operator: 'Jio', plan: 'Premium - 56 Days', amount: 666, status: 'success' },
-];
+// const rechargeData = [
+//     { id: 'RCH001234567', date: '2026-01-13 10:30 AM', mobile: '9876543210', operator: 'Airtel', plan: 'Unlimited - 84 Days', amount: 599, status: 'success' },
+//     { id: 'RCH001234568', date: '2026-01-10 03:45 PM', mobile: '9123456780', operator: 'Jio', plan: 'Data Pack - 28 Days', amount: 299, status: 'success' },
+//     { id: 'RCH001234569', date: '2026-01-08 11:20 AM', mobile: '9988776655', operator: 'Vi', plan: 'Smart Pack - 56 Days', amount: 449, status: 'failed' },
+//     { id: 'RCH001234570', date: '2026-01-05 05:15 PM', mobile: '9876501234', operator: 'BSNL', plan: 'Voice + Data - 90 Days', amount: 399, status: 'success' },
+//     { id: 'RCH001234571', date: '2026-01-03 02:30 PM', mobile: '9876543210', operator: 'Airtel', plan: 'Data Booster - 7 Days', amount: 48, status: 'success' },
+//     { id: 'RCH001234572', date: '2026-01-01 09:00 AM', mobile: '9123456780', operator: 'Jio', plan: 'Unlimited - 28 Days', amount: 239, status: 'pending' },
+//     { id: 'RCH001234573', date: '2025-12-28 04:20 PM', mobile: '9988776655', operator: 'Vi', plan: 'Mega Pack - 365 Days', amount: 2999, status: 'success' },
+//     { id: 'RCH001234574', date: '2025-12-25 01:10 PM', mobile: '9876501234', operator: 'BSNL', plan: 'Talk Time', amount: 100, status: 'success' },
+//     { id: 'RCH001234575', date: '2025-12-22 11:45 AM', mobile: '9876543210', operator: 'Airtel', plan: 'Netflix Bundle - 84 Days', amount: 1099, status: 'success' },
+//     { id: 'RCH001234576', date: '2025-12-20 03:30 PM', mobile: '9123456780', operator: 'Jio', plan: 'Premium - 56 Days', amount: 666, status: 'success' },
+// ];
 
 // Popular plans data
-const popularPlans = {
-    airtel: [
-        { amount: 299, validity: '28 Days', data: '1.5GB/day', description: 'Unlimited Calls + SMS' },
-        { amount: 599, validity: '84 Days', data: '2GB/day', description: 'Unlimited + Prime' },
-        { amount: 839, validity: '84 Days', data: '2GB/day', description: 'Amazon Prime + Disney+' },
-        { amount: 3359, validity: '365 Days', data: '2.5GB/day', description: 'Full Year Pack' }
-    ],
-    jio: [
-        { amount: 239, validity: '28 Days', data: '1.5GB/day', description: 'Unlimited Calls' },
-        { amount: 666, validity: '84 Days', data: '1.5GB/day', description: 'Premium Pack' },
-        { amount: 719, validity: '84 Days', data: '2GB/day', description: 'Netflix Mobile' },
-        { amount: 3599, validity: '365 Days', data: '2.5GB/day', description: 'Annual Pack' }
-    ],
-    vi: [
-        { amount: 299, validity: '28 Days', data: '1.5GB/day', description: 'Unlimited Calls' },
-        { amount: 449, validity: '56 Days', data: '1.5GB/day', description: 'Smart Pack' },
-        { amount: 699, validity: '84 Days', data: '1.5GB/day', description: 'Weekend Data' },
-        { amount: 2999, validity: '365 Days', data: '1.5GB/day', description: 'Year Pack' }
-    ],
-    bsnl: [
-        { amount: 199, validity: '28 Days', data: '2GB/day', description: 'Unlimited Voice' },
-        { amount: 397, validity: '70 Days', data: '2GB/day', description: 'Extended Validity' },
-        { amount: 797, validity: '150 Days', data: '2GB/day', description: 'Long Term' },
-        { amount: 2399, validity: '365 Days', data: '2GB/day', description: 'Annual Special' }
-    ]
-};
+// const popularPlans = {
+//     airtel: [
+//         { amount: 299, validity: '28 Days', data: '1.5GB/day', description: 'Unlimited Calls + SMS' },
+//         { amount: 599, validity: '84 Days', data: '2GB/day', description: 'Unlimited + Prime' },
+//         { amount: 839, validity: '84 Days', data: '2GB/day', description: 'Amazon Prime + Disney+' },
+//         { amount: 3359, validity: '365 Days', data: '2.5GB/day', description: 'Full Year Pack' }
+//     ],
+//     jio: [
+//         { amount: 239, validity: '28 Days', data: '1.5GB/day', description: 'Unlimited Calls' },
+//         { amount: 666, validity: '84 Days', data: '1.5GB/day', description: 'Premium Pack' },
+//         { amount: 719, validity: '84 Days', data: '2GB/day', description: 'Netflix Mobile' },
+//         { amount: 3599, validity: '365 Days', data: '2.5GB/day', description: 'Annual Pack' }
+//     ],
+//     vi: [
+//         { amount: 299, validity: '28 Days', data: '1.5GB/day', description: 'Unlimited Calls' },
+//         { amount: 449, validity: '56 Days', data: '1.5GB/day', description: 'Smart Pack' },
+//         { amount: 699, validity: '84 Days', data: '1.5GB/day', description: 'Weekend Data' },
+//         { amount: 2999, validity: '365 Days', data: '1.5GB/day', description: 'Year Pack' }
+//     ],
+//     bsnl: [
+//         { amount: 199, validity: '28 Days', data: '2GB/day', description: 'Unlimited Voice' },
+//         { amount: 397, validity: '70 Days', data: '2GB/day', description: 'Extended Validity' },
+//         { amount: 797, validity: '150 Days', data: '2GB/day', description: 'Long Term' },
+//         { amount: 2399, validity: '365 Days', data: '2GB/day', description: 'Annual Special' }
+//     ]
+// };
 
 let rechargeTable;
 
 $(document).ready(function() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     rechargeTable = $('#rechargeTable').DataTable({
-        data: rechargeData,
+        processing: true,
+        serverSide: false, // Agar pure server-side pagination chahiye to true karo
+        ajax: {
+            url: '/fetch/topics/0',   // Laravel route
+            type: 'POST',
+            dataSrc: 'data' 
+        },
+        // data: rechargeData,
         responsive: true,
         dom: 'Bfrtip',
         buttons: [
@@ -293,7 +308,7 @@ $(document).ready(function() {
                 className: 'dt-button',
                 title: 'Mobile Recharge History',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6]
+                    columns: [0, 1, 2]
                 }
             },
             {
@@ -302,7 +317,7 @@ $(document).ready(function() {
                 className: 'dt-button',
                 title: 'Mobile Recharge History',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6]
+                    columns: [0, 1, 2, 3]
                 },
                 customize: function(doc) {
                     doc.styles.title = {
@@ -319,46 +334,35 @@ $(document).ready(function() {
                 className: 'dt-button',
                 title: 'Mobile Recharge History',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6]
+                    columns: [0, 1, 2]
                 }
             }
         ],
         columns: [
             { data: 'id' },
-            { data: 'date' },
+            { data: 'subject.title' },
             { 
-                data: 'mobile',
-                render: function(data) {
-                    return '<span class="font-mono font-semibold">' + data + '</span>';
-                }
+                data: 'title',
+                
             },
             { 
-                data: 'operator',
-                render: function(data) {
-                    const colors = {
-                        'Airtel': 'red',
-                        'Jio': 'blue',
-                        'Vi': 'purple',
-                        'BSNL': 'green'
-                    };
-                    const color = colors[data] || 'gray';
-                    return `<span class="px-3 py-1 text-xs font-semibold text-${color}-700 bg-${color}-100 rounded-full">${data}</span>`;
-                }
-            },
-            { data: 'plan' },
-            { 
-                data: 'amount',
-                render: function(data) {
-                    return '<span class="font-bold text-gray-900">₹' + data.toLocaleString() + '</span>';
-                }
+                data: 'slug',
+                
             },
             { 
-                data: 'status',
+                data: 'order_index',
+                render: function(data, type, row) {
+                    return `<div class="max-w-xs text-sm text-gray-700">${data}</div>`;
+                }
+                
+            },
+            
+            { 
+                data: 'is_active',
                 render: function(data) {
                     const badges = {
-                        'success': '<span class="px-3 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">Success</span>',
-                        'pending': '<span class="px-3 py-1 text-xs font-semibold text-yellow-700 bg-yellow-100 rounded-full">Pending</span>',
-                        'failed': '<span class="px-3 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full">Failed</span>'
+                        '1': '<span class="px-3 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">Active</span>',
+                        '0': '<span class="px-3 py-1 text-xs font-semibold text-yellow-700 bg-yellow-100 rounded-full">Inactive</span>',
                     };
                     return badges[data] || data;
                 }
@@ -370,10 +374,10 @@ $(document).ready(function() {
                     return `
                         <div class="flex gap-2">
                             <button onclick='viewRecharge(${JSON.stringify(row)})' class="px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded hover:bg-blue-700 transition-colors">
-                                View
+                                Edit
                             </button>
-                            <button class="px-3 py-1 bg-gray-600 text-white text-xs font-semibold rounded hover:bg-gray-700 transition-colors">
-                                Receipt
+                            <button onclick='deleteRecharge(${row.id})' class="px-3 py-1 bg-red-600 text-white text-xs font-semibold rounded hover:bg-red-700 transition-colors">
+                                Delete
                             </button>
                         </div>
                     `;
