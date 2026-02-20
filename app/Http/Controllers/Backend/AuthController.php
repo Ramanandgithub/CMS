@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    public function showLoginForm()
+    {
+        return view('backend.loginpage.index');
+    }
+
     public function login(Request $request)
     {
         $request->validate([
