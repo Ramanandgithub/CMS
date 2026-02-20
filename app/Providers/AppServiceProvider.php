@@ -21,30 +21,36 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->composer('frontend.sidebar.sidebar', function ($view) {
+        // Subjects for layout + topbar
+View::composer(['frontend.layouts.app', 'frontend.topbar.index'], function ($view) {
+    $view->with('subjects', Subject::all());
+});
 
-            $slug = request()->route('slug');
+// Sidebar composer
+View::composer('frontend.sidebar.sidebar', function ($view) {
 
-            if ($slug) {
+    $slug = request()->route('slug');
 
-                $subject['subjects'] = Subject::where('slug', $slug)
-                    ->with('topics')
-                    ->firstOrFail();
+    $subject = null; 
+    if ($slug) {
 
-                $topicIds = $subject['subjects']->topics->pluck('id');
+        $subjectData = Subject::where('slug', $slug)
+            ->with('topics')
+            ->first();
 
-                $subject['subtopics'] = SubTopic::whereIn('topic_id', $topicIds)->get();
-                // foreach ($subject['subtopics'] as $topic) {
-                //     dd($topic->slug);
-                // }
-            }
-            // dd($subject);
+        if ($subjectData) {
+            $topicIds = $subjectData->topics->pluck('id');
 
-            $view->with('subject', $subject);
-            View::composer(['frontend.layouts.app', 'frontend.topbar.index'], function ($view) {
-                $view->with('subjects', Subject::all());
-            });
-        });
+            $subject = [
+                'subjects' => $subjectData,
+                'subtopics' => SubTopic::whereIn('topic_id', $topicIds)->get()
+            ];
+        }
+    }
+    // dd($subject);
+    $view->with('subjects', $subject);
+});
+
 
     }
 }

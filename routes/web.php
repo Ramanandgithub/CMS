@@ -16,12 +16,21 @@ Route::get('/', [HomeController::class, 'default'])->name('frontend.default');
 // Route::get('/',function(){
 //      return view('frontend.default');
 // });
-
+Route::get('/home', [HomeController::class, 'home'])->name('home');
 Route::get('/{slug}', [HomeController::class, 'home'])->name('subject.show');
 Route::get('{subject}/{slug}/{id}', [HomeController::class, 'subtopicShow'])
     ->name('subtopic.show');
 
+
 Route::get('dashboard/login', [AuthController::class, 'showLoginForm'])->name('login');
+
+
+
+// Route::get('/admin/login', function(){
+//     return view( 'backend.loginpage.index');
+// })->name('login');
+
+
 
 /*
 |--------------------------------------------------------------------------

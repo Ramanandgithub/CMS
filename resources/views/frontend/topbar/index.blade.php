@@ -50,7 +50,7 @@
         <div class="flex items-center gap-6 overflow-x-auto py-3">
             @if(isset($subjects) && count($subjects) > 0)
                 @foreach($subjects as $subject)
-                    <a href="{{ route('subject.show', $subject->slug) }}" class="text-white font-medium hover:text-gray-200 whitespace-nowrap transition-colors text-sm">
+                    <a href="{{$subject->slug }}" class="text-white font-medium hover:text-gray-200 whitespace-nowrap transition-colors text-sm">
                         {{ $subject->title }}
                     </a>
                 @endforeach

@@ -19,36 +19,49 @@
                     </button>
                 @endforeach --}}
                 <div class="topic-content max-h-0 overflow-hidden transition-all duration-300 bg-gray-50">
-                    <div class="py-2">
-                        <!-- Subtopic: Python Variable & Data Type -->
-                        <div class="subtopic-section">
-                            @foreach ($subject['subjects']->topics as $topic)
-                                <button
-                                    class="subtopic-header w-full flex items-center justify-between px-5 py-2 text-left text-gray-700 font-medium hover:bg-gray-100 transition-colors"
-                                    onclick="toggleSubtopic(this)">
-                                    <a
-                                        href="{{ route('subtopic.show', ['subject','slug' => $topic->slug, 'id' => $topic->id]) }}"><span
-                                            class="text-sm">{{ $topic->title }}</span><a>
-                                            <i
-                                                class="fas fa-chevron-up text-xs transition-transform duration-300 subtopic-arrow"></i>
-                                </button>
-                            @endforeach
-                            @foreach ($subject['subtopics'] as $subtopic)
-                                <div class="subtopic-content max-h-96 overflow-hidden transition-all duration-300">
+                <div class="py-2">
+
+                    <div class="subtopic-section">
+
+                        @foreach ($subjects['subjects']->topics as $topic)
+
+                            
+                            <button
+                                class="subtopic-header w-full flex items-center justify-between px-5 py-2 text-left text-gray-700 font-medium hover:bg-gray-100 transition-colors"
+                                onclick="toggleSubtopic(this)">
+
+                                <span class="text-sm">{{ $topic->title }}</span>
+
+                                <i class="fas fa-chevron-up text-xs transition-transform duration-300 subtopic-arrow"></i>
+                            </button>
+
+                            {{-- SUBTOPICS OF THIS TOPIC --}}
+                            <div class="subtopic-content max-h-0 overflow-hidden transition-all duration-300">
+
+                                @foreach ($subjects['subtopics']->where('topic_id',$topic->id) as $subtopic)
+
                                     <a href="#"
                                         class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">
-                                        {{ $subtopic->title }}
-                                    </a>
-                                </div>
-                            @endforeach
 
-                        </div>
+                                        {{ $subtopic->title }}
+
+                                    </a>
+
+                                @endforeach
+
+                            </div>
+
+                        @endforeach
+
                     </div>
+
                 </div>
             </div>
 
+            </div>
+
             <!-- Java Tutorial Section -->
-            <div class="topic-section border-t border-gray-200">
+            <!-- <div class="topic-section border-t border-gray-200">
                 <button
                     class="topic-header w-full flex items-center justify-between px-5 py-3 text-left text-gray-800 font-semibold hover:bg-gray-50 transition-colors"
                     onclick="toggleTopic(this)">
@@ -82,10 +95,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Database Section -->
-            <div class="topic-section border-t border-gray-200">
+            <!-- <div class="topic-section border-t border-gray-200">
                 <button
                     class="topic-header w-full flex items-center justify-between px-5 py-3 text-left text-gray-800 font-semibold hover:bg-gray-50 transition-colors"
                     onclick="toggleTopic(this)">
@@ -108,7 +121,7 @@
                             Tutorial</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
