@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Subjects for layout + topbar
-View::composer(['frontend.layouts.app', 'frontend.topbar.index'], function ($view) {
+View::composer(['frontend.default', 'frontend.topbar.index'], function ($view) {
     $view->with('subjects', Subject::all());
 });
 
