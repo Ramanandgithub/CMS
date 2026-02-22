@@ -1,9 +1,9 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Subject;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -32,7 +32,6 @@ class AdminController extends Controller
         return view('backend.add-topics');
     }
 
-
     public function addSubTopic()
     {
         return view('backend.add-sub-topic');
@@ -43,137 +42,134 @@ class AdminController extends Controller
         return view('backend.add-page');
     }
 
-    public function addSubjects(Request $request)
+    public function storeSubjects(Request $request)
     {
-        try{
-            // Handle subject addition logic here
+        try {
             $request->validate([
-                'subject_name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255|unique:subjects,slug',
-                'description' => 'nullable|string',
-                'order_index' => 'required|integer',
+                'subjectName'        => 'required|string|max:255',
+                'subjectSlug'        => 'required|string|max:255|unique:subjects,slug',
+                'subjectDescription' => 'nullable|string',
+                'orderIndex'         => 'required|integer',
             ]);
 
             Subject::create([
-                'name' => $request->subject_name,
-                'slug' => $request->slug,
-                'description' => $request->description,
-                'order_index' => $request->order_index,
+                'title'       => $request->subjectName,
+                'slug'        => $request->subjectSlug,
+                'description' => $request->subjectDescription,
+                'order_index' => $request->orderIndex,
+                'is_active'   => 1,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Subject added successfully'
+                'status'  => true,
+                'message' => 'Subject added successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to add subject: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to add subject: ' . $e->getMessage(),
             ], 500);
         }
-        
-
 
     }
-    public function editSubject(Request $request, $id)
+    public function updateSubject(Request $request, $id)
     {
-        try{
-            // Handle subject addition logic here
+        try {
+           
             $request->validate([
-                'subject_name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255|unique:subjects,slug',
-                'description' => 'nullable|string',
-                'order_index' => 'required|integer',
+                'subjectName' => 'required|string|max:255',
+                'subjectSlug'         => 'required|string|max:255|unique:subjects,slug',
+                'subjectDescription'  => 'nullable|string',
+                'orderIndex'  => 'required|integer',
             ]);
 
             $data = Subject::find($id);
-            if(!$data){
+
+            if (! $data) {
                 return response()->json([
-                    'status' => 'error',
-                    'message' => 'Subject not found'
+                    'status'  => 'error',
+                    'message' => 'Subject not found',
                 ], 404);
             }
+
             $data->update([
-                'name' => $request->subject_name,
-                'slug' => $request->slug,
-                'description' => $request->description,
-                'order_index' => $request->order_index,
+                'title'        => $request->subjectName,
+                'slug'        => $request->subjectSlug,
+                'description' => $request->subjectDescription,
+                'order_index' => $request->orderIndex,
             ]);
+            
             return response()->json([
-                'status' => true,
-                'message' => 'Subject updated successfully'
+                'status'  => true,
+                'message' => 'Subject updated successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to update subject: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to update subject: ' . $e->getMessage(),
             ], 500);
         }
-        
-
 
     }
 
     public function deleteSubject(Request $request, $id)
     {
-        try{
+        try {
             // Handle subject addition logic here
             $request->validate([
                 'is_active' => 'required|boolean',
             ]);
 
             $data = Subject::find($id);
-            if(!$data){
+            if (! $data) {
                 return response()->json([
-                    'status' => 'error',
-                    'message' => 'Subject not found'
+                    'status'  => 'error',
+                    'message' => 'Subject not found',
                 ], 404);
             }
             $data->update([
-                
+
                 'is_active' => $request->is_active,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Subject deleted successfully'
+                'status'  => true,
+                'message' => 'Subject deleted successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to delete subject: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to delete subject: ' . $e->getMessage(),
             ], 500);
         }
-        
-
 
     }
 
     public function addTopicsToDB(Request $request)
     {
-        try{
-           
+        try {
+
             $request->validate([
-                'topic_name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255|unique:topics,slug',
+                'topic_name'  => 'required|string|max:255',
+                'slug'        => 'required|string|max:255|unique:topics,slug',
                 'description' => 'nullable|string',
                 'order_index' => 'required|integer',
-                'subject_id' => 'required|integer|exists:subjects,id',
+                'subject_id'  => 'required|integer|exists:subjects,id',
             ]);
 
             Topic::create([
-                'name' => $request->topic_name,
-                'slug' => $request->slug,
+                'name'        => $request->topic_name,
+                'slug'        => $request->slug,
                 'description' => $request->description,
                 'order_index' => $request->order_index,
-                'subject_id' => $request->subject_id,
+                'subject_id'  => $request->subject_id,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Topic added successfully'
+                'status'  => true,
+                'message' => 'Topic added successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to add topic: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to add topic: ' . $e->getMessage(),
             ], 500);
         }
 
@@ -181,101 +177,101 @@ class AdminController extends Controller
 
     public function editTopics(Request $request, $id)
     {
-        try{
-           
+        try {
+
             $request->validate([
-                'topic_name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255|unique:topics,slug,' . $id,
+                'topic_name'  => 'required|string|max:255',
+                'slug'        => 'required|string|max:255|unique:topics,slug,' . $id,
                 'description' => 'nullable|string',
                 'order_index' => 'required|integer',
-                'subject_id' => 'required|integer|exists:subjects,id',
+                'subject_id'  => 'required|integer|exists:subjects,id',
             ]);
 
             $data = Topic::find($id);
-            if(!$data){
+            if (! $data) {
                 return response()->json([
-                    'status' => 'error',
-                    'message' => 'Topic not found'
+                    'status'  => 'error',
+                    'message' => 'Topic not found',
                 ], 404);
             }
             $data->update([
-                'name' => $request->topic_name,
-                'slug' => $request->slug,
+                'name'        => $request->topic_name,
+                'slug'        => $request->slug,
                 'description' => $request->description,
                 'order_index' => $request->order_index,
-                'subject_id' => $request->subject_id,
+                'subject_id'  => $request->subject_id,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Topic updated successfully'
+                'status'  => true,
+                'message' => 'Topic updated successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to update topic: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to update topic: ' . $e->getMessage(),
             ], 500);
         }
 
     }
-    
+
     public function deleteTopic(Request $request, $id)
     {
-        try{
-            
+        try {
+
             $request->validate([
                 'is_active' => 'required|boolean',
             ]);
 
             $data = Topic::find($id);
-            if(!$data){
+            if (! $data) {
                 return response()->json([
-                    'status' => 'error',
-                    'message' => 'Topic not found'
+                    'status'  => 'error',
+                    'message' => 'Topic not found',
                 ], 404);
             }
             $data->update([
-                
+
                 'is_active' => $request->is_active,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Topic deleted successfully'
+                'status'  => true,
+                'message' => 'Topic deleted successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to delete topic: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to delete topic: ' . $e->getMessage(),
             ], 500);
         }
     }
 
     public function addSubTopicsToDB(Request $request)
     {
-        try{
-           
+        try {
+
             $request->validate([
                 'sub_topic_name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255|unique:sub_topics,slug',
-                'description' => 'nullable|string',
-                'order_index' => 'required|integer',
-                'topic_id' => 'required|integer|exists:topics,id',
+                'slug'           => 'required|string|max:255|unique:sub_topics,slug',
+                'description'    => 'nullable|string',
+                'order_index'    => 'required|integer',
+                'topic_id'       => 'required|integer|exists:topics,id',
             ]);
 
             SubTopic::create([
-                'name' => $request->sub_topic_name,
-                'slug' => $request->slug,
+                'name'        => $request->sub_topic_name,
+                'slug'        => $request->slug,
                 'description' => $request->description,
                 'order_index' => $request->order_index,
-                'topic_id' => $request->topic_id,
+                'topic_id'    => $request->topic_id,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Sub-topic added successfully'
+                'status'  => true,
+                'message' => 'Sub-topic added successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to add sub-topic: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to add sub-topic: ' . $e->getMessage(),
             ], 500);
         }
 
@@ -283,38 +279,38 @@ class AdminController extends Controller
 
     public function editSubTopics(Request $request, $id)
     {
-        try{
-        
+        try {
+
             $request->validate([
                 'sub_topic_name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255|unique:sub_topics,slug,' . $id,
-                'description' => 'nullable|string',
-                'order_index' => 'required|integer',
-                'topic_id' => 'required|integer|exists:topics,id',
+                'slug'           => 'required|string|max:255|unique:sub_topics,slug,' . $id,
+                'description'    => 'nullable|string',
+                'order_index'    => 'required|integer',
+                'topic_id'       => 'required|integer|exists:topics,id',
             ]);
 
             $data = SubTopic::find($id);
-            if(!$data){
+            if (! $data) {
                 return response()->json([
-                    'status' => 'error',
-                    'message' => 'Sub-topic not found'
+                    'status'  => 'error',
+                    'message' => 'Sub-topic not found',
                 ], 404);
             }
             $data->update([
-                'name' => $request->sub_topic_name,
-                'slug' => $request->slug,
+                'name'        => $request->sub_topic_name,
+                'slug'        => $request->slug,
                 'description' => $request->description,
                 'order_index' => $request->order_index,
-                'topic_id' => $request->topic_id,
+                'topic_id'    => $request->topic_id,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Sub-topic updated successfully'
+                'status'  => true,
+                'message' => 'Sub-topic updated successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to update sub-topic: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to update sub-topic: ' . $e->getMessage(),
             ], 500);
         }
 
@@ -322,62 +318,62 @@ class AdminController extends Controller
 
     public function deleteSubTopic(Request $request, $id)
     {
-        try{
-            
+        try {
+
             $request->validate([
                 'is_active' => 'required|boolean',
             ]);
 
             $data = SubTopic::find($id);
-            if(!$data){
+            if (! $data) {
                 return response()->json([
-                    'status' => 'error',
-                    'message' => 'Sub-topic not found'
+                    'status'  => 'error',
+                    'message' => 'Sub-topic not found',
                 ], 404);
             }
             $data->update([
-                
+
                 'is_active' => $request->is_active,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Sub-topic deleted successfully'
+                'status'  => true,
+                'message' => 'Sub-topic deleted successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to delete sub-topic: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to delete sub-topic: ' . $e->getMessage(),
             ], 500);
         }
     }
 
     public function addPageToDB(Request $request)
     {
-        try{
-           
+        try {
+
             $request->validate([
-                'page_name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255|unique:pages,slug',
-                'content' => 'nullable|string',
-                'order_index' => 'required|integer',
+                'page_name'    => 'required|string|max:255',
+                'slug'         => 'required|string|max:255|unique:pages,slug',
+                'content'      => 'nullable|string',
+                'order_index'  => 'required|integer',
                 'sub_topic_id' => 'required|integer|exists:sub_topics,id',
             ]);
 
             Page::create([
-                'name' => $request->page_name,
-                'slug' => $request->slug,
-                'content' => $request->content,
-                'order_index' => $request->order_index,
+                'name'         => $request->page_name,
+                'slug'         => $request->slug,
+                'content'      => $request->content,
+                'order_index'  => $request->order_index,
                 'sub_topic_id' => $request->sub_topic_id,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Page added successfully'
+                'status'  => true,
+                'message' => 'Page added successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to add page: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to add page: ' . $e->getMessage(),
             ], 500);
         }
 
@@ -385,38 +381,38 @@ class AdminController extends Controller
 
     public function editPage(Request $request, $id)
     {
-        try{
-        
+        try {
+
             $request->validate([
-                'page_name' => 'required|string|max:255',
-                'slug' => 'required|string|max:255|unique:pages,slug,' . $id,
-                'content' => 'nullable|string',
-                'order_index' => 'required|integer',
+                'page_name'    => 'required|string|max:255',
+                'slug'         => 'required|string|max:255|unique:pages,slug,' . $id,
+                'content'      => 'nullable|string',
+                'order_index'  => 'required|integer',
                 'sub_topic_id' => 'required|integer|exists:sub_topics,id',
             ]);
 
             $data = Page::find($id);
-            if(!$data){
+            if (! $data) {
                 return response()->json([
-                    'status' => 'error',
-                    'message' => 'Page not found'
+                    'status'  => 'error',
+                    'message' => 'Page not found',
                 ], 404);
             }
             $data->update([
-                'name' => $request->page_name,
-                'slug' => $request->slug,
-                'content' => $request->content,
-                'order_index' => $request->order_index,
+                'name'         => $request->page_name,
+                'slug'         => $request->slug,
+                'content'      => $request->content,
+                'order_index'  => $request->order_index,
                 'sub_topic_id' => $request->sub_topic_id,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Page updated successfully'
+                'status'  => true,
+                'message' => 'Page updated successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to update page: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to update page: ' . $e->getMessage(),
             ], 500);
         }
 
@@ -424,34 +420,33 @@ class AdminController extends Controller
 
     public function deletePage(Request $request, $id)
     {
-        try{
-            
+        try {
+
             $request->validate([
                 'is_active' => 'required|boolean',
             ]);
 
             $data = Page::find($id);
-            if(!$data){
+            if (! $data) {
                 return response()->json([
-                    'status' => 'error',
-                    'message' => 'Page not found'
+                    'status'  => 'error',
+                    'message' => 'Page not found',
                 ], 404);
             }
             $data->update([
-                
+
                 'is_active' => $request->is_active,
             ]);
             return response()->json([
-                'status' => true,
-                'message' => 'Page deleted successfully'
+                'status'  => true,
+                'message' => 'Page deleted successfully',
             ]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to delete page: ' . $e->getMessage()
+                'status'  => 'error',
+                'message' => 'Failed to delete page: ' . $e->getMessage(),
             ], 500);
         }
     }
 
-    
 }

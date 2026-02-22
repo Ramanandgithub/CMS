@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CommonController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\CommonController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +22,14 @@ Route::get('{subject}/{slug}/{id}', [HomeController::class, 'subtopicShow'])
     ->name('subtopic.show');
 
 
+Route::get('dashboard/login', [AuthController::class, 'showLoginForm'])->name('login');
 
-Route::get('/admin/login', function(){
-    return view( 'backend.loginpage.index');
-})->name('login');
+
+
+// Route::get('/admin/login', function(){
+//     return view( 'backend.loginpage.index');
+// })->name('login');
+
 
 
 /*
@@ -41,6 +45,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/add-subject', [AdminController::class, 'addSubject'])->name('add-subject');
+    Route::post('/subjects/store', [AdminController::class, 'storeSubjects'])
+        ->name('subjects.store');
+    Route::post('/subjects/update/{id}', [AdminController::class, 'updateSubject'])->name('admin.subjects.update');
 
     Route::get('/user-list', [AdminController::class, 'userList'])->name('user-list');
     Route::get('/user-profile', [AdminController::class, 'userProfile'])->name('user-profile');
@@ -51,7 +58,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/add-page', [AdminController::class, 'addPage'])->name('add-page');
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | Common Routes
@@ -60,9 +66,3 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 Route::post('fetch/{type}/{id?}/{returntype?}', [CommonController::class, 'fetchData'])
     ->name('fetch.data');
-  
-
-    
-
-
-    
