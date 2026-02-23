@@ -14,7 +14,7 @@
                     <p class="text-blue-200">Add a new subtopic to the system</p>
                 </div>
                 <div class="mt-4 md:mt-0">
-                    <button onclick="$('#rechargeForm').slideToggle()"
+                    <button onclick="$('#subTopicForm').slideToggle()"
                         class="px-6 py-3 bg-white text-blue-900 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-md">
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,41 +84,32 @@
             </div>
         </div>
 
-        <!-- Recharge Form -->
-        <div id="rechargeForm" class="bg-white rounded-xl shadow-lg p-6" style="display: none;">
+        <!-- SubTopic Form -->
+        <div id="subTopicForm" class="bg-white rounded-xl shadow-lg p-6" style="display: none;">
             <h3 class="text-xl font-bold text-gray-900 mb-6">Quick Add Subtopic</h3>
 
-            <form class="space-y-6">
+            <form class="space-y-6" id="addSubTopicForm">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="hidden" id="subTopicId" name="subTopicId">
                     <!-- Mobile Number -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2"> Select Subject Name</label>
-                        <select name="subjectName" id="subjectName"
+                        <select name="subjectId" id="subjectId" aria-placeholder="Choose Subjects"
                             class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
-                            <option value="">Select Subject</option>
-                            <option value="math">Math</option>
-                            <option value="science">Science</option>
-                            <option value="history">History</option>
-                            <option value="geography">Geography</option>
-                            <option value="english">English</option>
+                            @foreach ($subjects as $subject)
+                                <option value="{{ $subject->id }}">{{ $subject->title }}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <!-- Operator -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Select Topic</label>
-                        <select name="topicName" id="topicName"
+                        <select name="topicId" id="topicId" aria-placeholder="Choose topics"
                             class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
-                            <option value="">Select Topic</option>
-                            <option value="algebra">Algebra</option>
-                            <option value="geometry">Geometry</option>
-                            <option value="physics">Physics</option>
-                            <option value="chemistry">Chemistry</option>
-                            <option value="world-history">World History</option>
-                            <option value="indian-history">Indian History</option>
-                            <option value="physical-geography">Physical Geography</option>
-                            <option value="human-geography">Human Geography</option>
-
+                            @foreach ($topics as $topic)
+                                <option value="{{ $topic->id }}">{{ $topic->title }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -134,15 +125,19 @@
                         <input type="text" name="subtopicSlug" id="subtopicSlug"
                             class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
                     </div>
+
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Index</label>
-                        <input type="text" name="subtopicIndex" id="subtopicIndex"
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                        <textarea type="text" name="subtopicDescription" id="subtopicDescription"
                             class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                        </textarea>
                     </div>
 
-
-
-
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Index</label>
+                        <input type="number" name="subtopicIndex" id="subtopicIndex"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    </div>
                 </div>
 
                 <!-- Popular Plans -->
@@ -334,7 +329,7 @@
                         data: 'parent_id',
                     },
                     {
-                        data: 'topic_id',
+                        data: 'topic.title',
                     },
                     {
                         data: 'title',
@@ -364,7 +359,7 @@
                         render: function(data, type, row) {
                             return `
                         <div class="flex gap-2">
-                            <button onclick='viewRecharge(${JSON.stringify(row)})'
+                            <button onclick='editSubTopic(${row.id})'
                                 class="px-[5px] py-[1px] bg-blue-700 text-white rounded hover:bg-blue-700 transition-colors"
                                 title="Edit">
                                 <i class="fas fa-pen"></i>
@@ -394,30 +389,6 @@
             });
 
         });
-
-
-        function loadPlans() {
-            const operator = $('#operator').val();
-            if (operator && popularPlans[operator]) {
-                const plans = popularPlans[operator];
-                let html = '';
-                plans.forEach(plan => {
-                    html += `
-                <div class="plan-card bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 rounded-xl p-4 transition-all" onclick="selectPlan(${plan.amount})">
-                    <div class="text-2xl font-bold text-blue-900 mb-2">₹${plan.amount}</div>
-                    <div class="text-sm font-semibold text-gray-700 mb-1">${plan.validity}</div>
-                    <div class="text-sm text-gray-600 mb-1">${plan.data}</div>
-                    <div class="text-xs text-gray-500">${plan.description}</div>
-                </div>
-            `;
-                });
-                $('#plansContainer').html(html);
-                $('#popularPlans').slideDown();
-            } else {
-                $('#plansContainer').html('');
-                $('#popularPlans').slideUp();
-            }
-        }
 
         function selectPlan(amount) {
             $('#amount').val(amount);
@@ -468,7 +439,7 @@
                 <p class="text-gray-700">Status: <span class="font-semibold">${subTopic.status.charAt(0).toUpperCase() + subTopic.status.slice(1)}</span></p>
             </div>
         </div>
-    `;
+       `;
             $('#subTopicModalContent').html(modalContent);
             $('#subTopicModal').fadeIn();
         }
@@ -476,5 +447,70 @@
         function closeSubTopicModal() {
             $('#subTopicModal').fadeOut();
         }
+
+        function editSubTopic(id) {
+            alert('hello');
+            let table = $('#subTopicTable').DataTable();
+            let rowData = table.rows().data().toArray().find(r => r.id == id);
+            if (!rowData) return;
+            $('#subjectId').val(rowData.topic.subject.id);
+            $('#topicId').val(rowData.topic.id);
+            $('#subtopicTitle').val(rowData.title);
+            $('#subtopicSlug').val(rowData.slug);
+            $('#subtopicIndex').val(rowData.order_index);
+            $('#subtopicDescription').val(rowData.description);
+
+            $('#subTopicForm').slideDown();
+        }
+    </script>
+
+    <script>
+        $('#addSubTopicForm').on('submit', function(e) {
+            e.preventDefault();
+
+            let subTopicId = $('#subTopicId').val();
+            let url = subTopicId ?
+                '/admin/sub-topics/update/' + subTopicId :
+                '/admin/sub-topics/store';
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    subjectId: $('#subjectId').val(),
+                    topicId: $('#topicId').val(),
+                    title: $('#subtopicTitle').val(),
+                    slug: $('#subtopicSlug').val(),
+                    description: $('#subtopicDescription').val(),
+                    order_index: $('#subtopicIndex').val()
+                },
+                success: function(response) {
+                    if (response.status === true) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message
+                        });
+                        $('#addSubTopicForm')[0].reload();
+                        $('#subTopicForm').hide();
+                        $('#subTopicTable').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: xhr.responseJSON?.message || 'Something went wrong'
+                    });
+                }
+            });
+        });
     </script>
 @endpush

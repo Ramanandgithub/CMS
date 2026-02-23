@@ -9,10 +9,12 @@ class SubTopic extends Model
     protected $table = 'subtopics';
 
     protected $fillable = [
+        'parent_id ',
         'topic_id',
         'title',
         'slug',
         'order_index',
+        'description',
         'is_active',
     ];
 

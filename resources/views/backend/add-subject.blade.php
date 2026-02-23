@@ -334,20 +334,20 @@
                         orderable: false,
                         render: function(data, type, row) {
                             return `
-            <div class="flex gap-2">
-                <button onclick="editSubject(${row.id})"
-                    class="px-[5px] py-[1px] bg-blue-700 text-white rounded hover:bg-blue-800 transition-colors"
-                    title="Edit">
-                    <i class="fas fa-pen"></i>
-                </button>
+                            <div class="flex gap-2">
+                                <button onclick="editSubject(${row.id})"
+                                    class="px-[5px] py-[1px] bg-blue-700 text-white rounded hover:bg-blue-800 transition-colors"
+                                    title="Edit">
+                                    <i class="fas fa-pen"></i>
+                                </button>
 
-                <button onclick="deleteRecharge(${row.id})"
-                    class="px-[5px] py-[1px] bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
-                    title="Delete">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-        `;
+                                <button onclick="deleteSubject(${row.id}, ${row.is_active})"
+                                    class="px-[5px] py-[1px] bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                                    title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
                         }
                     }
                 ],
@@ -377,6 +377,49 @@
             $('#orderIndex').val(rowData.order_index);
 
             $('#subjectForm').slideDown();
+        }
+
+        function deleteSubject(id, isActive) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to delete this subject?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ url('admin/subjects/delete') }}/" + id + "/" + isActive,
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            if (response.status === true) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted',
+                                    text: response.message
+                                });
+                                $('#subjectTable').DataTable().ajax.reload();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: xhr.responseJSON?.message || 'Something went wrong'
+                            });
+                        }
+                    });
+                }
+            });
         }
     </script>
 

@@ -14,7 +14,7 @@
                     <p class="text-blue-200">Add a new topic to the system</p>
                 </div>
                 <div class="mt-4 md:mt-0">
-                    <button onclick="$('#rechargeForm').slideToggle()"
+                    <button onclick="$('#topicForm').slideToggle()"
                         class="px-6 py-3 bg-white text-blue-900 rounded-lg font-semibold hover:bg-blue-50 transition-all shadow-md">
                         <div class="flex items-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,21 +85,21 @@
         </div>
 
         <!-- Recharge Form -->
-        <div id="rechargeForm" class="bg-white rounded-xl shadow-lg p-6" style="display: none;">
+        <div id="topicForm" class="bg-white rounded-xl shadow-lg p-6" style="display: none;">
             <h3 class="text-xl font-bold text-gray-900 mb-6">Add Qucick Topics</h3>
 
-            <form class="space-y-6">
+            <form class="space-y-6" id="addTopicForm">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="hidden" id="topicId" value="">
                     <!-- subject Name -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Select Subjects</label>
-                        <select id="suject_id" onchange="loadSujects()"
-                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
-                            <option value="">Choose Subject</option>
-                            <option value="php">PHP</option>
-                            <option value="laravel">Laravel</option>
-                            <option value="mysql">Mysql</option>
-                            <option value="db">DBMS</option>
+                        <select id="subject_id" onchange="loadSujects()"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none"
+                            aria-placeholder="Choose Subject">
+                            @foreach ($subjects as $subject)
+                                <option value="{{ $subject->id }}">{{ $subject->title }}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -116,10 +116,11 @@
                         <input type="text" id="topicSlug" placeholder="Enter topic slug"
                             class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
                     </div>
-
-
-
-
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Order Index</label>
+                        <input type="number" id="orderIndex" placeholder="Enter order index" name="orderIndex"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    </div>
                 </div>
 
                 <!-- Popular Plans -->
@@ -207,18 +208,14 @@
 
             <!-- Recharge History Table -->
             <div class="overflow-x-auto">
-                <table id="rechargeTable" class="display responsive nowrap" style="width:100%">
+                <table id="topicTable" class="display responsive nowrap" style="width:100%">
                     <thead class="bg-gradient-to-r from-blue-900 to-blue-800 text-white">
                         <tr>
                             <th class="px-6 py-4"> ID</th>
-
                             <th class="px-6 py-4">Subject</th>
                             <th class="px-6 py-4">Topic</th>
-
-
                             <th class="px-6 py-4">Slug</th>
-                            <th class="px-6 py-4">Description</th>
-
+                            <th class="px-6 py-4">OrderIndex</th>
                             <th class="px-6 py-4">Status</th>
                             <th class="px-6 py-4">Action</th>
                         </tr>
@@ -263,49 +260,7 @@
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 
     <script>
-        // Sample recharge data
-        // const rechargeData = [
-        //     { id: 'RCH001234567', date: '2026-01-13 10:30 AM', mobile: '9876543210', operator: 'Airtel', plan: 'Unlimited - 84 Days', amount: 599, status: 'success' },
-        //     { id: 'RCH001234568', date: '2026-01-10 03:45 PM', mobile: '9123456780', operator: 'Jio', plan: 'Data Pack - 28 Days', amount: 299, status: 'success' },
-        //     { id: 'RCH001234569', date: '2026-01-08 11:20 AM', mobile: '9988776655', operator: 'Vi', plan: 'Smart Pack - 56 Days', amount: 449, status: 'failed' },
-        //     { id: 'RCH001234570', date: '2026-01-05 05:15 PM', mobile: '9876501234', operator: 'BSNL', plan: 'Voice + Data - 90 Days', amount: 399, status: 'success' },
-        //     { id: 'RCH001234571', date: '2026-01-03 02:30 PM', mobile: '9876543210', operator: 'Airtel', plan: 'Data Booster - 7 Days', amount: 48, status: 'success' },
-        //     { id: 'RCH001234572', date: '2026-01-01 09:00 AM', mobile: '9123456780', operator: 'Jio', plan: 'Unlimited - 28 Days', amount: 239, status: 'pending' },
-        //     { id: 'RCH001234573', date: '2025-12-28 04:20 PM', mobile: '9988776655', operator: 'Vi', plan: 'Mega Pack - 365 Days', amount: 2999, status: 'success' },
-        //     { id: 'RCH001234574', date: '2025-12-25 01:10 PM', mobile: '9876501234', operator: 'BSNL', plan: 'Talk Time', amount: 100, status: 'success' },
-        //     { id: 'RCH001234575', date: '2025-12-22 11:45 AM', mobile: '9876543210', operator: 'Airtel', plan: 'Netflix Bundle - 84 Days', amount: 1099, status: 'success' },
-        //     { id: 'RCH001234576', date: '2025-12-20 03:30 PM', mobile: '9123456780', operator: 'Jio', plan: 'Premium - 56 Days', amount: 666, status: 'success' },
-        // ];
-
-        // Popular plans data
-        // const popularPlans = {
-        //     airtel: [
-        //         { amount: 299, validity: '28 Days', data: '1.5GB/day', description: 'Unlimited Calls + SMS' },
-        //         { amount: 599, validity: '84 Days', data: '2GB/day', description: 'Unlimited + Prime' },
-        //         { amount: 839, validity: '84 Days', data: '2GB/day', description: 'Amazon Prime + Disney+' },
-        //         { amount: 3359, validity: '365 Days', data: '2.5GB/day', description: 'Full Year Pack' }
-        //     ],
-        //     jio: [
-        //         { amount: 239, validity: '28 Days', data: '1.5GB/day', description: 'Unlimited Calls' },
-        //         { amount: 666, validity: '84 Days', data: '1.5GB/day', description: 'Premium Pack' },
-        //         { amount: 719, validity: '84 Days', data: '2GB/day', description: 'Netflix Mobile' },
-        //         { amount: 3599, validity: '365 Days', data: '2.5GB/day', description: 'Annual Pack' }
-        //     ],
-        //     vi: [
-        //         { amount: 299, validity: '28 Days', data: '1.5GB/day', description: 'Unlimited Calls' },
-        //         { amount: 449, validity: '56 Days', data: '1.5GB/day', description: 'Smart Pack' },
-        //         { amount: 699, validity: '84 Days', data: '1.5GB/day', description: 'Weekend Data' },
-        //         { amount: 2999, validity: '365 Days', data: '1.5GB/day', description: 'Year Pack' }
-        //     ],
-        //     bsnl: [
-        //         { amount: 199, validity: '28 Days', data: '2GB/day', description: 'Unlimited Voice' },
-        //         { amount: 397, validity: '70 Days', data: '2GB/day', description: 'Extended Validity' },
-        //         { amount: 797, validity: '150 Days', data: '2GB/day', description: 'Long Term' },
-        //         { amount: 2399, validity: '365 Days', data: '2GB/day', description: 'Annual Special' }
-        //     ]
-        // };
-
-        let rechargeTable;
+        let topicTable;
 
         $(document).ready(function() {
             $.ajaxSetup({
@@ -313,7 +268,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            rechargeTable = $('#rechargeTable').DataTable({
+            topicTable = $('#topicTable').DataTable({
                 processing: true,
                 serverSide: false, // Agar pure server-side pagination chahiye to true karo
                 ajax: {
@@ -397,20 +352,20 @@
                         orderable: false,
                         render: function(data, type, row) {
                             return `
-                        <div class="flex gap-2">
-                            <button onclick='viewRecharge(${JSON.stringify(row)})'
-                                class="px-[5px] py-[1px] bg-blue-700 text-white rounded hover:bg-blue-700 transition-colors"
-                                title="Edit">
-                                <i class="fas fa-pen"></i>
-                            </button>
+                            <div class="flex gap-2">
+                                <button onclick="editTopic(${row.id})"
+                                    class="px-[5px] py-[1px] bg-blue-700 text-white rounded hover:bg-blue-800 transition-colors"
+                                    title="Edit">
+                                    <i class="fas fa-pen"></i>
+                                </button>
 
-                            <button onclick='deleteRecharge(${row.id})'
-                                class="px-[5px] py-[1px] bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
-                                title="Delete">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    `;
+                                <button onclick="deleteTopic(${row.id}, ${row.is_active})"
+                                    class="px-[5px] py-[1px] bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                                    title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
                         }
                     }
                 ],
@@ -426,85 +381,144 @@
             });
         });
 
-        function loadPlans() {
-            const operator = $('#operator').val();
-            if (operator && popularPlans[operator]) {
-                const plans = popularPlans[operator];
-                let html = '';
-                plans.forEach(plan => {
-                    html += `
-                <div class="plan-card bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 rounded-xl p-4 transition-all" onclick="selectPlan(${plan.amount})">
-                    <div class="text-2xl font-bold text-blue-900 mb-2">₹${plan.amount}</div>
-                    <div class="text-sm font-semibold text-gray-700 mb-1">${plan.validity}</div>
-                    <div class="text-sm text-gray-600 mb-1">${plan.data}</div>
-                    <div class="text-xs text-gray-500">${plan.description}</div>
-                </div>
-            `;
-                });
-                $('#plansContainer').html(html);
-                $('#popularPlans').slideDown();
-            } else {
-                $('#plansContainer').html('');
-                $('#popularPlans').slideUp();
-            }
-        }
+
 
         function selectPlan(amount) {
             $('#amount').val(amount);
         }
 
-        function applyRechargeFilters() {
-            const fromDate = $('#filterFromDate').val();
-            const toDate = $('#filterToDate').val();
-            const operator = $('#filterOperator').val();
-            const status = $('#filterStatus').val();
 
-            rechargeTable.clear().draw();
-
-            const filteredData = rechargeData.filter(recharge => {
-                const rechargeDate = new Date(recharge.date);
-                const from = fromDate ? new Date(fromDate) : null;
-                const to = toDate ? new Date(toDate) : null;
-
-                return (!from || rechargeDate >= from) &&
-                    (!to || rechargeDate <= to) &&
-                    (!operator || recharge.operator.toLowerCase() === operator.toLowerCase()) &&
-                    (!status || recharge.status === status);
-            });
-
-            rechargeTable.rows.add(filteredData).draw();
-        }
 
         function resetRechargeFilters() {
             $('#filterFromDate').val('');
             $('#filterToDate').val('');
             $('#filterOperator').val('');
             $('#filterStatus').val('');
-            rechargeTable.clear().rows.add(rechargeData).draw();
-        }
-
-        function viewRecharge(recharge) {
-            const modalContent = `
-        <div class="space-y-4">
-            <div>
-                <h4 class="text-lg font-bold text-gray-900 mb-2">Recharge ID: <span class="font-mono font-semibold">${recharge.id}</span></h4>
-                <p class="text-gray-700">Date & Time: <span class="font-semibold">${recharge.date}</span></p>
-            </div>
-            <div>
-                <p class="text-gray-700">Mobile Number: <span class="font-mono font-semibold">${recharge.mobile}</span></p>
-                <p class="text-gray-700">Operator: <span class="font-semibold">${recharge.operator}</span></p>
-                <p class="text-gray-700">Plan Details: <span class="font-semibold  ">${recharge.plan}</span></p>
-                <p class="text-gray-700">Amount: <span class="font-bold text-gray-900">₹${recharge.amount.toLocaleString()}</span></p>
-                <p class="text-gray-700">Status: <span class="font-semibold">${recharge.status.charAt(0).toUpperCase() + recharge.status.slice(1)}</span></p>
-            </div>
-        </div>
-    `;
-            $('#rechargeModalContent').html(modalContent);
-            $('#rechargeModal').fadeIn();
+            topicTable.clear().rows.add(topicData).draw();
         }
 
         function closeRechargeModal() {
             $('#rechargeModal').fadeOut();
         }
+
+        function editTopic(id) {
+
+            let table = $('#topicTable').DataTable();
+            let rowData = table.rows().data().toArray().find(r => r.id == id);
+
+            if (!rowData) return;
+
+            $('#topicId').val(rowData.id);
+            $('#subject_id').val(rowData.subject_id);
+            $('#topicName').val(rowData.title);
+            $('#topicSlug').val(rowData.slug);
+            $('#orderIndex').val(rowData.order_index);
+
+            $('#topicForm').slideDown();
+        }
+
+        function deleteTopic(id, isActive) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to delete this topic?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ url('admin/topics/delete') }}/" + id + "/" + isActive,
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            if (response.status === true) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted',
+                                    text: response.message
+                                });
+                                $('#topicTable').DataTable().ajax.reload();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: xhr.responseJSON?.message || 'Something went wrong'
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        $('#addTopicForm').on('submit', function(e) {
+            e.preventDefault();
+
+            let topicId = $('#topicId').val();
+            let url = topicId ?
+                '/admin/topics/update/' + topicId :
+                '/admin/topics/store';
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    subject_id: $('#subject_id').val(),
+                    title: $('#topicName').val(),
+                    slug: $('#topicSlug').val(),
+                    order_index: $('#orderIndex').val()
+                },
+                success: function(response) {
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: response.message ?? 'Topic saved successfully',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+
+                    $('#addTopicForm')[0].reset();
+                },
+                error: function(xhr) {
+
+                    // Validation Errors
+                    if (xhr.status === 422) {
+                        let errors = xhr.responseJSON.errors;
+                        let errorMsg = '';
+
+                        $.each(errors, function(key, value) {
+                            errorMsg += value[0] + '<br>';
+                        });
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Validation Error',
+                            html: errorMsg
+                        });
+
+                    } else {
+                        // Other Errors
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!'
+                        });
+                    }
+                }
+            });
+        });
     </script>
 @endpush

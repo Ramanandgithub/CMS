@@ -110,15 +110,17 @@
         <div class="container mx-auto px-6">
             <div class="flex items-center gap-6 overflow-x-auto py-3">
                 @foreach ($subjects as $subject)
-                    <a href="{{ route('subject.show', $subject->slug) }}"
-                        class="text-white font-medium hover:text-gray-300 whitespace-nowrap">{{ $subject->title }}</a>
+                    <a href="{{route('subjects.show'),$subject->slug}}"
+                        class="text-white font-medium hover:text-gray-300 whitespace-nowrap">
+                        {{ $subject->title }}
+                    </a>
                 @endforeach
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="container mx-auto px-6 py-12 mt-8" >
+    <div class="container mx-auto px-6 py-12 mt-8">
         <!-- Hero Section -->
         <section
             class="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-12 lg:p-16 mb-16 overflow-hidden">

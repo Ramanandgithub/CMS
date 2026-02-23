@@ -2,8 +2,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Page;
 use App\Models\Subject;
+use App\Models\SubTopic;
+use App\Models\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -29,12 +33,15 @@ class AdminController extends Controller
 
     public function addTopics()
     {
-        return view('backend.add-topics');
+        $subjects = Subject::where('is_active', 1)->get();
+        return view('backend.add-topics', compact('subjects'));
     }
 
     public function addSubTopic()
     {
-        return view('backend.add-sub-topic');
+        $subjects = Subject::where('is_active', 1)->get();
+        $topics   = Topic::where('is_active', 1)->get();
+        return view('backend.add-sub-topic', compact('subjects', 'topics'));
     }
 
     public function addPage()
@@ -74,12 +81,12 @@ class AdminController extends Controller
     public function updateSubject(Request $request, $id)
     {
         try {
-           
+
             $request->validate([
-                'subjectName' => 'required|string|max:255',
-                'subjectSlug'         => 'required|string|max:255|unique:subjects,slug',
-                'subjectDescription'  => 'nullable|string',
-                'orderIndex'  => 'required|integer',
+                'subjectName'        => 'required|string|max:255',
+                'subjectSlug'        => 'required|string|max:255|unique:subjects,slug',
+                'subjectDescription' => 'nullable|string',
+                'orderIndex'         => 'required|integer',
             ]);
 
             $data = Subject::find($id);
@@ -92,12 +99,12 @@ class AdminController extends Controller
             }
 
             $data->update([
-                'title'        => $request->subjectName,
+                'title'       => $request->subjectName,
                 'slug'        => $request->subjectSlug,
                 'description' => $request->subjectDescription,
                 'order_index' => $request->orderIndex,
             ]);
-            
+
             return response()->json([
                 'status'  => true,
                 'message' => 'Subject updated successfully',
@@ -111,25 +118,27 @@ class AdminController extends Controller
 
     }
 
-    public function deleteSubject(Request $request, $id)
+    public function deleteSubject($id, $isActive)
     {
         try {
-            // Handle subject addition logic here
-            $request->validate([
-                'is_active' => 'required|boolean',
-            ]);
 
             $data = Subject::find($id);
+
             if (! $data) {
                 return response()->json([
                     'status'  => 'error',
                     'message' => 'Subject not found',
                 ], 404);
             }
-            $data->update([
 
-                'is_active' => $request->is_active,
+            if ($isActive == 1) {
+                $isActive = 0;
+            }
+
+            $data->update([
+                'is_active' => $isActive,
             ]);
+
             return response()->json([
                 'status'  => true,
                 'message' => 'Subject deleted successfully',
@@ -143,25 +152,27 @@ class AdminController extends Controller
 
     }
 
-    public function addTopicsToDB(Request $request)
+    public function storeTopics(Request $request)
     {
         try {
 
             $request->validate([
-                'topic_name'  => 'required|string|max:255',
-                'slug'        => 'required|string|max:255|unique:topics,slug',
-                'description' => 'nullable|string',
-                'order_index' => 'required|integer',
                 'subject_id'  => 'required|integer|exists:subjects,id',
+                'title'       => 'required|string|max:255',
+                'slug'        => 'required|string|max:255|unique:topics,slug',
+                'order_index' => 'required|integer',
             ]);
 
+            $slug = Str::slug($request->slug);
+
             Topic::create([
-                'name'        => $request->topic_name,
-                'slug'        => $request->slug,
-                'description' => $request->description,
+                'title'       => $request->title,
+                'slug'        => $slug,
                 'order_index' => $request->order_index,
                 'subject_id'  => $request->subject_id,
+                'is_active'   => 1,
             ]);
+
             return response()->json([
                 'status'  => true,
                 'message' => 'Topic added successfully',
@@ -175,64 +186,73 @@ class AdminController extends Controller
 
     }
 
-    public function editTopics(Request $request, $id)
+    public function updateTopics(Request $request, $id)
     {
         try {
 
             $request->validate([
-                'topic_name'  => 'required|string|max:255',
-                'slug'        => 'required|string|max:255|unique:topics,slug,' . $id,
-                'description' => 'nullable|string',
+                'title'       => 'required|string|max:255',
+                'slug'        => 'required|string|max:255',
                 'order_index' => 'required|integer',
                 'subject_id'  => 'required|integer|exists:subjects,id',
             ]);
 
             $data = Topic::find($id);
+
             if (! $data) {
                 return response()->json([
                     'status'  => 'error',
                     'message' => 'Topic not found',
                 ], 404);
             }
+
             $data->update([
-                'name'        => $request->topic_name,
+                'title'       => $request->title,
                 'slug'        => $request->slug,
-                'description' => $request->description,
                 'order_index' => $request->order_index,
                 'subject_id'  => $request->subject_id,
             ]);
+
             return response()->json([
                 'status'  => true,
                 'message' => 'Topic updated successfully',
             ]);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => $e->errors()['slug'][0] ?? 'Validation failed',
+            ], 422);
+
         } catch (\Exception $e) {
             return response()->json([
                 'status'  => 'error',
                 'message' => 'Failed to update topic: ' . $e->getMessage(),
             ], 500);
         }
-
     }
 
-    public function deleteTopic(Request $request, $id)
+    public function deleteTopic($id, $isActive)
     {
         try {
 
-            $request->validate([
-                'is_active' => 'required|boolean',
-            ]);
-
             $data = Topic::find($id);
+
             if (! $data) {
                 return response()->json([
                     'status'  => 'error',
                     'message' => 'Topic not found',
                 ], 404);
             }
+            if ($isActive == 1) {
+                $isActive = 0;
+            }
+
             $data->update([
 
-                'is_active' => $request->is_active,
+                'is_active' => $isActive,
             ]);
+
             return response()->json([
                 'status'  => true,
                 'message' => 'Topic deleted successfully',
@@ -245,29 +265,33 @@ class AdminController extends Controller
         }
     }
 
-    public function addSubTopicsToDB(Request $request)
+    public function storeSubTopics(Request $request)
     {
         try {
-
             $request->validate([
-                'sub_topic_name' => 'required|string|max:255',
-                'slug'           => 'required|string|max:255|unique:sub_topics,slug',
-                'description'    => 'nullable|string',
-                'order_index'    => 'required|integer',
-                'topic_id'       => 'required|integer|exists:topics,id',
+                'subjectId'   => 'required|string|exists:subjects,id',
+                'topicId'     => 'required|integer|exists:topics,id',
+                'title'       => 'required|string|max:255',
+                'slug'        => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'order_index' => 'required|integer',
             ]);
 
             SubTopic::create([
-                'name'        => $request->sub_topic_name,
+                'parent_id'   => $request->subjectId,
+                'topic_id'    => $request->topicId,
+                'title'       => $request->title,
                 'slug'        => $request->slug,
                 'description' => $request->description,
                 'order_index' => $request->order_index,
-                'topic_id'    => $request->topic_id,
+                'is_active'   => 1,
             ]);
+
             return response()->json([
                 'status'  => true,
                 'message' => 'Sub-topic added successfully',
             ]);
+
         } catch (\Exception $e) {
             return response()->json([
                 'status'  => 'error',
