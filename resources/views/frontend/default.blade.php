@@ -63,7 +63,7 @@
     <nav class="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
+                 Logo 
                 <div class="flex items-center gap-2">
                     <div class="w-10 h-10 bg-gray-900 flex items-center justify-center text-white font-bold text-xl">
                         R
@@ -71,7 +71,7 @@
                     <span class="text-2xl font-bold text-gray-900">point Tech</span>
                 </div>
 
-                <!-- Menu Items -->
+                 Menu Items 
                 <div class="hidden lg:flex items-center gap-8">
                     <div class="relative group">
                         <button class="flex items-center gap-1 text-gray-900 font-medium hover:text-teal-600">
@@ -93,7 +93,7 @@
                     </div>
                 </div>
 
-                <!-- Theme Toggles -->
+                 Theme Toggles 
                 <div class="flex items-center gap-2">
                     <button class="w-8 h-8 rounded-full bg-gray-300 hover:bg-gray-400"></button>
                     <button class="w-8 h-8 rounded-full bg-teal-500 hover:bg-teal-600"></button>
@@ -109,18 +109,22 @@
     <div class="bg-green-600 fixed top-[72px] left-0 right-0 z-50">
         <div class="container mx-auto px-6">
             <div class="flex items-center gap-6 overflow-x-auto py-3">
-                @foreach ($subjects as $subject)
-                    <a href="{{route('subjects.show'),$subject->slug}}"
-                        class="text-white font-medium hover:text-gray-300 whitespace-nowrap">
-                        {{ $subject->title }}
-                    </a>
-                @endforeach
+                @if(isset($subjects) && count($subjects) > 0)
+                    @foreach($subjects as $subject)
+                        <a href="/subject/{{$subject->slug}}" class="text-white font-medium hover:text-gray-200 whitespace-nowrap transition-colors text-sm">
+                            {{ $subject->title }}
+                        </a>
+                    @endforeach
+                @else
+                    <span class="text-white text-sm">Loading categories...</span>
+                @endif
             </div>
         </div>
     </div>
+    
 
     <!-- Main Content -->
-    <div class="container mx-auto px-6 py-12 mt-8">
+    <div class="container mx-auto px-6 py-12 mt-8" >
         <!-- Hero Section -->
         <section
             class="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl p-12 lg:p-16 mb-16 overflow-hidden">

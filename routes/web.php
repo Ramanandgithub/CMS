@@ -17,7 +17,7 @@ Route::get('/', [HomeController::class, 'default'])->name('frontend.default');
 //      return view('frontend.default');
 // });
 // Route::get('/home', [HomeController::class, 'home'])->name('home');
-Route::get('/{slug}', [HomeController::class, 'home'])->name('subjects.show');
+Route::get('subject/{slug}', [HomeController::class, 'home'])->name('subjects.show');
 Route::get('{subject}/{slug}/{id}', [HomeController::class, 'subtopicShow'])
     ->name('subtopic.show');
 
