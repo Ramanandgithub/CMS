@@ -1,10 +1,10 @@
 <?php
 namespace App\Providers;
 
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
 use App\Models\Subject;
 use App\Models\SubTopic;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,35 +22,35 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Subjects for layout + topbar
-View::composer(['frontend.default', 'frontend.topbar.index'], function ($view) {
-    $view->with('subjects', Subject::all());
-});
 
-// Sidebar composer
-View::composer('frontend.sidebar.sidebar', function ($view) {
+        View::composer(['frontend.default', 'frontend.topbar.index'], function ($view) {
+            $view->with('subjects', Subject::all());
+        });
 
-    $slug = request()->route('slug');
+       
 
-    $subject = null; 
-    if ($slug) {
+        // View::composer('frontend.sidebar.sidebar', function ($view) {
 
-        $subjectData = Subject::where('slug', $slug)
-            ->with('topics')
-            ->first();
+        //     $slug = request()->route('slug');
 
-        if ($subjectData) {
-            $topicIds = $subjectData->topics->pluck('id');
+        //     $subject = null;
+        //     if ($slug) {
 
-            $subject = [
-                'subjects' => $subjectData,
-                'subtopics' => SubTopic::whereIn('topic_id', $topicIds)->get()
-            ];
-        }
-    }
-    // dd($subject);
-    $view->with('subjects', $subject);
-});
+        //         $subjectData = Subject::where('slug', $slug)
+        //             ->with('topics')
+        //             ->first();
 
+        //         if ($subjectData) {
+        //             $topicIds = $subjectData->topics->pluck('id');
+
+        //             $subject = [
+        //                 'subjects'  => $subjectData,
+        //                 'subtopics' => SubTopic::whereIn('topic_id', $topicIds)->get(),
+        //             ];
+        //         }
+        //     }
+        //     $view->with('subjects', $subject);
+        // });
 
     }
 }
