@@ -2,6 +2,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use App\Models\Subject;
+use App\Models\SubTopic;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,9 +22,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Subjects for layout + topbar
-        // View::composer(['frontend.layouts.app', 'frontend.topbar.index'], function ($view) {
-        //     $view->with('subjects', Subject::all());
-        // });
+
+        View::composer(['frontend.default', 'frontend.topbar.index'], function ($view) {
+            $view->with('subjects', Subject::all());
+        });
+
+       
 
         // View::composer('frontend.sidebar.sidebar', function ($view) {
 

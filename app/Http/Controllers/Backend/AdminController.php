@@ -8,6 +8,7 @@ use App\Models\SubTopic;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class AdminController extends Controller
 {
@@ -399,6 +400,7 @@ class AdminController extends Controller
                 'order_index'  => $request->order_index,
                 'sub_topic_id' => $request->sub_topic_id,
             ]);
+            
             return response()->json([
                 'status'  => true,
                 'message' => 'Page added successfully',
@@ -478,6 +480,114 @@ class AdminController extends Controller
             return response()->json([
                 'status'  => 'error',
                 'message' => 'Failed to delete page: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function addBlocksContent(Request $request)
+    {
+        try {
+
+            $request->validate([
+                'page_id'    => 'required|integer|exists:pages,id',
+                'block_type' => 'required|string|max:50',
+                'block_data' => 'required|string',
+                'meta'       => 'nullable|array',
+                'order_index'=> 'required|integer',
+            ]);
+
+            $block = ContentBlock::create([
+                'page_id'    => $request->page_id,
+                'block_type' => $request->block_type,
+                'block_data' => $request->block_data,
+                'meta'       => $request->meta,
+                'order_index'=> $request->order_index,
+            ]);
+
+            Cache::forget("page_blocks_" . $block->page_id);
+
+            return response()->json([
+                'status'  => true,
+                'message' => 'Content block added successfully',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'Failed to add content block: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function editBlocksContent(Request $request, $id)
+    {
+        try {
+
+            $request->validate([
+                'block_type' => 'required|string|max:50',
+                'block_data' => 'required|string',
+                'meta'       => 'nullable|array',
+                'order_index'=> 'required|integer',
+            ]);
+
+            $block = ContentBlock::find($id);
+            if (! $block) {
+                return response()->json([
+                    'status'  => 'error',
+                    'message' => 'Content block not found',
+                ], 404);
+            }
+
+            $block->update([
+                'block_type' => $request->block_type,
+                'block_data' => $request->block_data,
+                'meta'       => $request->meta,
+                 'order_index'=> $request->order_index,
+            ]);
+
+            Cache::forget("page_blocks_" . $block->page_id);
+
+            return response()->json([
+                'status'  => true,
+                'message' => 'Content block updated successfully',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'Failed to update content block: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function deleteBlocksContent(Request $request, $id)
+    {
+        try {
+
+            $request->validate([
+                'is_active' => 'required|boolean',
+            ]);
+
+            $block = ContentBlock::find($id);
+            if (! $block) {
+                return response()->json([
+                    'status'  => 'error',
+                    'message' => 'Content block not found',
+                ], 404);
+            }
+
+            $block->update([
+                'is_active' => $request->is_active,
+            ]);
+
+            Cache::forget("page_blocks_" . $block->page_id);
+
+            return response()->json([
+                'status'  => true,
+                'message' => 'Content block deleted successfully',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'Failed to delete content block: ' . $e->getMessage(),
             ], 500);
         }
     }
