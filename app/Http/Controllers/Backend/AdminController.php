@@ -301,31 +301,37 @@ class AdminController extends Controller
 
     }
 
-    public function editSubTopics(Request $request, $id)
+    public function updateSubTopics(Request $request, $id)
     {
         try {
 
             $request->validate([
-                'sub_topic_name' => 'required|string|max:255',
-                'slug'           => 'required|string|max:255|unique:sub_topics,slug,' . $id,
-                'description'    => 'nullable|string',
-                'order_index'    => 'required|integer',
-                'topic_id'       => 'required|integer|exists:topics,id',
+                'subjectId'   => 'required|string|exists:subjects,id',
+                'topicId'     => 'required|integer|exists:topics,id',
+                'title'       => 'required|string|max:255',
+                'slug'        => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'order_index' => 'required|integer',
             ]);
 
+            // dd($request->subjectId);
+
             $data = SubTopic::find($id);
+
             if (! $data) {
                 return response()->json([
                     'status'  => 'error',
                     'message' => 'Sub-topic not found',
                 ], 404);
             }
+
             $data->update([
-                'name'        => $request->sub_topic_name,
+                'title'       => $request->title,
                 'slug'        => $request->slug,
                 'description' => $request->description,
                 'order_index' => $request->order_index,
-                'topic_id'    => $request->topic_id,
+                'topic_id'    => $request->topicId,
+                'parent_id'   => $request->subjectId,
             ]);
             return response()->json([
                 'status'  => true,
@@ -340,25 +346,28 @@ class AdminController extends Controller
 
     }
 
-    public function deleteSubTopic(Request $request, $id)
+    public function deleteSubTopic($id, $isActive)
     {
         try {
 
-            $request->validate([
-                'is_active' => 'required|boolean',
-            ]);
-
             $data = SubTopic::find($id);
+
             if (! $data) {
                 return response()->json([
                     'status'  => 'error',
                     'message' => 'Sub-topic not found',
                 ], 404);
             }
+
+            if($isActive == 1){
+                $isActive = 0;
+            }
+
             $data->update([
 
-                'is_active' => $request->is_active,
+                'is_active' => $isActive,
             ]);
+            
             return response()->json([
                 'status'  => true,
                 'message' => 'Sub-topic deleted successfully',

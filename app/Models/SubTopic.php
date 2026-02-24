@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +8,7 @@ class SubTopic extends Model
     protected $table = 'subtopics';
 
     protected $fillable = [
-        'parent_id ',
+        'parent_id',
         'topic_id',
         'title',
         'slug',

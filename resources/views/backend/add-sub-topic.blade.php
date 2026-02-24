@@ -365,7 +365,7 @@
                                 <i class="fas fa-pen"></i>
                             </button>
 
-                            <button onclick='deleteRecharge(${row.id})'
+                            <button onclick='deleteSubTopic(${row.id}, ${row.is_active})'
                                 class="px-[5px] py-[1px] bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
                                 title="Delete">
                                 <i class="fas fa-trash"></i>
@@ -448,19 +448,80 @@
             $('#subTopicModal').fadeOut();
         }
 
+
+
         function editSubTopic(id) {
-            alert('hello');
             let table = $('#subTopicTable').DataTable();
             let rowData = table.rows().data().toArray().find(r => r.id == id);
-            if (!rowData) return;
-            $('#subjectId').val(rowData.topic.subject.id);
-            $('#topicId').val(rowData.topic.id);
+
+            console.log(rowData);
+
+            if (!rowData) {
+                console.log("Row not found");
+                return;
+            }
+
+
+            $('#subTopicId').val(rowData.id);
+
+
+            if (rowData.topic && rowData.topic.subject) {
+                $('#subjectId').val(rowData.topic.subject.id);
+            }
+
+            if (rowData.topic) {
+                $('#topicId').val(rowData.topic.id);
+            }
+
             $('#subtopicTitle').val(rowData.title);
             $('#subtopicSlug').val(rowData.slug);
             $('#subtopicIndex').val(rowData.order_index);
             $('#subtopicDescription').val(rowData.description);
 
             $('#subTopicForm').slideDown();
+        }
+
+        function deleteSubTopic(id, isActive) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to delete this sub topic?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ url('admin/sub-topics/delete') }}/" + id + "/" + isActive,
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            if (response.status === true) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted',
+                                    text: response.message
+                                });
+                                $('#subTopicTable').DataTable().ajax.reload();
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message
+                                });
+                            }
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: xhr.responseJSON?.message || 'Something went wrong'
+                            });
+                        }
+                    });
+                }
+            });
         }
     </script>
 
@@ -492,9 +553,12 @@
                             title: 'Success',
                             text: response.message
                         });
-                        $('#addSubTopicForm')[0].reload();
-                        $('#subTopicForm').hide();
+
+                        $('#addSubTopicForm')[0].reset();
+                        $('#subTopicId').val('');
+                        $('#subTopicForm').slideUp();
                         $('#subTopicTable').DataTable().ajax.reload();
+
                     } else {
                         Swal.fire({
                             icon: 'error',
