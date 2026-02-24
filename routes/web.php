@@ -59,6 +59,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::post('/sub-topics/update/{id}', [AdminController::class, 'updateSubTopics'])->name('admin.sub-topics.update');
     Route::post('/sub-topics/delete/{id}/{isActive}', [AdminController::class, 'deleteSubTopic'])->name('admin.sub-topics.delete');
     Route::get('/add-page', [AdminController::class, 'addPage'])->name('add-page');
+
+    //add the content block route
+    Route::post('/content-blocks/store', [AdminController::class, 'addBlocksContent'])->name('content-blocks.store');
+    Route::post('/content-blocks/update/{id}', [AdminController::class, 'editBlocksContent'])->name('content-blocks.update');
+    Route::post('/content-blocks/delete/{id}', [AdminController::class, 'deleteBlocksContent'])->name('content-blocks.delete');
+
 });
 
 /*
@@ -66,6 +72,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 | Common Routes
 |--------------------------------------------------------------------------
 */
-
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
 Route::post('fetch/{type}/{id?}/{returntype?}', [CommonController::class, 'fetchData'])
     ->name('fetch.data');

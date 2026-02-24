@@ -9,7 +9,7 @@
                         <div class="w-11 h-11 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-xl">
                             <i class="fas fa-graduation-cap"></i>
                         </div>
-                        <span class="text-2xl font-bold">Tpoint Tech</span>
+                        <span class="text-2xl font-bold">Rpoint Tech</span>
                     </div>
                     <p class="text-white/70 leading-relaxed">
                         Get access to 500+ tutorials from top instructors around the world. Learn programming, web development, data science, and more.
@@ -177,7 +177,7 @@
     <div class="border-t border-white/10 py-6 mt-10">
         <div class="max-w-screen-2xl mx-auto px-5 flex flex-col md:flex-row justify-between items-center gap-5">
             <div class="text-white/60 text-sm text-center md:text-left">
-                &copy; {{ date('Y') }} Tpoint Tech. All rights reserved.
+                &copy; {{ date('Y') }} Rpoint Tech. All rights reserved.
             </div>
             <div class="flex flex-wrap gap-6 justify-center md:justify-end">
                 <a href="" class="text-white/60 text-sm transition-all duration-300 hover:text-white">Privacy Policy</a>

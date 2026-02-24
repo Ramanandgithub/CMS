@@ -63,7 +63,7 @@
     <nav class="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                 Logo 
+                 
                 <div class="flex items-center gap-2">
                     <div class="w-10 h-10 bg-gray-900 flex items-center justify-center text-white font-bold text-xl">
                         R
@@ -71,7 +71,7 @@
                     <span class="text-2xl font-bold text-gray-900">point Tech</span>
                 </div>
 
-                 Menu Items 
+                 
                 <div class="hidden lg:flex items-center gap-8">
                     <div class="relative group">
                         <button class="flex items-center gap-1 text-gray-900 font-medium hover:text-teal-600">
@@ -93,7 +93,7 @@
                     </div>
                 </div>
 
-                 Theme Toggles 
+                 <!-- Theme Toggles  -->
                 <div class="flex items-center gap-2">
                     <button class="w-8 h-8 rounded-full bg-gray-300 hover:bg-gray-400"></button>
                     <button class="w-8 h-8 rounded-full bg-teal-500 hover:bg-teal-600"></button>
