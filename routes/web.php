@@ -5,7 +5,12 @@ use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redis;
 
+Route::get('/redis-test', function () {
+    Redis::set('name', 'Ramanand');
+    return Redis::get('name');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +24,8 @@ Route::get('/', [HomeController::class, 'default'])->name('frontend.default');
 // });
 // Route::get('/home', [HomeController::class, 'home'])->name('home');
 Route::get('subject/{slug}', [HomeController::class, 'home'])->name('subjects.show');
+Route::get('subject/{slug}/{subtopic}', [HomeController::class, 'pageShow'])->name('subjects.page.show');
+
 Route::get('{subject}/{slug}/{id}', [HomeController::class, 'subtopicShow'])
     ->name('subtopic.show');
 

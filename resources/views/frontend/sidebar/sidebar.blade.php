@@ -40,7 +40,7 @@
 
                                 @foreach ($subjects['subtopics']->where('topic_id',$topic->id) as $subtopic)
 
-                                    <a href="#"
+                                <a href="{{ $subtopic->slug }}"
                                         class="block px-5 py-2 pl-8 text-sm text-gray-600 hover:text-green-600 hover:bg-gray-100 transition-colors border-l-2 border-transparent hover:border-green-600">
 
                                         {{ $subtopic->title }}

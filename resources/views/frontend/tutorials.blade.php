@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'All Tutorials - Tpoint Tech')
-@section('meta_description', 'Browse all 500+ programming tutorials on Tpoint Tech. Learn Python, Java, JavaScript, Web Development, AI, and more.')
+@section('title', 'All Tutorials - Rpoint Tech')
+@section('meta_description', 'Browse all 500+ programming tutorials on Rpoint Tech. Learn Python, Java, JavaScript, Web Development, AI, and more.')
 
 @section('breadcrumb')
     <li class="text-text-dark text-sm font-medium">Tutorials</li>
@@ -9,7 +9,7 @@
 
 @section('content')
 
-<!-- Page Header -->
+<!-- Page Header -->    
 <div class="bg-gradient-to-br from-primary to-secondary rounded-2xl p-8 md:p-10 mb-10 text-white">
     <h1 class="text-3xl md:text-4xl font-bold mb-2">All Tutorials</h1>
     <p class="text-base text-white/90">

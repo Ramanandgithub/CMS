@@ -38,4 +38,14 @@ class HomeController extends Controller
         ]);
     }
 
+    // public function pageShow($slug, $subtopic)
+    // {
+    //     $page = Cache::remember('page_' . $slug . '_' . $subtopic, 3600, function () use ($slug, $subtopic) {
+    //         return SubTopic::where('slug', $subtopic)->first();
+    //     });
+    //     return view('frontend.home', [
+    //         'page' => $page,
+    //     ]);
+    // }
+
 }
